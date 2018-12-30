@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Engima &mdash; heer 0.1 documentation</title>
+  <title>ciphers.Engima &mdash; heer 0.1 documentation</title>
   
 
   
@@ -24,13 +24,13 @@
 
   
 
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
 
   
-  <script src="../_static/js/modernizr.min.js"></script>
+  <script src="../../_static/js/modernizr.min.js"></script>
 
 </head>
 
@@ -46,7 +46,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> heer
+            <a href="../../index.html" class="icon icon-home"> heer
           
 
           
@@ -59,7 +59,7 @@
 
           
 <div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -78,13 +78,14 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Julius.html">Caesar Cipher</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Affine.html">Affine module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Vigenere.html">Vigenere module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Jefferson.html">Jefferson module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Engima.html">Engima module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../examples.html">Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Julius.html">Caesar Cipher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Affine.html">Affine module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Vigenere.html">Vigenere module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Jefferson.html">Jefferson module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Engima.html">Engima module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">clean</a></li>
 </ul>
 
             
@@ -99,7 +100,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">heer</a>
+          <a href="../../index.html">heer</a>
         
       </nav>
 
@@ -128,11 +129,11 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="index.html">Module code</a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
         
-      <li>Engima</li>
+      <li>ciphers.Engima</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -147,18 +148,20 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Source code for Engima</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
+  <h1>Source code for ciphers.Engima</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">ciphers.CustomParser</span> <span class="k">as</span> <span class="nn">Parser</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="k">import</span> <span class="n">request</span>
+<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Enigma.py</span>
 <span class="sd">====================================</span>
 <span class="sd">Basic implementation of the M3 Enigma.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">import</span> <span class="nn">Colors</span>
+<span class="kn">from</span> <span class="nn">flask_restful</span> <span class="k">import</span> <span class="n">Resource</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="k">import</span> <span class="n">jsonify</span>
 
-<span class="n">color</span> <span class="o">=</span> <span class="n">Colors</span><span class="o">.</span><span class="n">textMod</span><span class="p">()</span>
 
 
-<div class="viewcode-block" id="M3"><a class="viewcode-back" href="../Engima.html#Engima.M3">[docs]</a><span class="k">class</span> <span class="nc">M3</span><span class="p">:</span>
+<div class="viewcode-block" id="M3"><a class="viewcode-back" href="../../Engima.html#ciphers.Engima.M3">[docs]</a><span class="k">class</span> <span class="nc">M3</span><span class="p">(</span><span class="n">Resource</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Represents the Enigma Machine used by the  Wehrmacht/Heer.</span>
 
 
@@ -180,10 +183,10 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fast_rotor</span> <span class="o">=</span> <span class="n">rotor_choices</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">medium_rotor</span> <span class="o">=</span> <span class="n">rotor_choices</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">slow_rotor</span> <span class="o">=</span> <span class="n">rotor_choices</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">reflector</span> <span class="o">=</span> <span class="n">reflector</span><span class="p">[</span><span class="s1">&#39;reflector_b&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fast_rotor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rotor_choices</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">medium_rotor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rotor_choices</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">slow_rotor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rotor_choices</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reflector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reflector</span><span class="p">[</span><span class="s1">&#39;reflector_b&#39;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">stecker_board</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">max_pairs</span> <span class="o">=</span> <span class="mi">10</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fast_counter</span> <span class="o">=</span> <span class="mi">25</span>
@@ -193,7 +196,47 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">middle_rotor_ring</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">left_rotor_ring</span> <span class="o">=</span> <span class="mi">0</span>
 
-<div class="viewcode-block" id="M3.step_rotors"><a class="viewcode-back" href="../Engima.html#Engima.M3.step_rotors">[docs]</a>    <span class="k">def</span> <span class="nf">step_rotors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="M3.get"><a class="viewcode-back" href="../../Engima.html#ciphers.Engima.M3.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This is for all get requests for Enigma.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The message decoded/encoded.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">custom_parser</span> <span class="o">=</span> <span class="n">Parser</span><span class="o">.</span><span class="n">Parsely</span><span class="o">.</span><span class="n">Enigma</span><span class="p">(</span><span class="n">Parser</span><span class="o">.</span><span class="n">Parsely</span><span class="p">)</span>
+        <span class="n">custom_parser</span><span class="o">=</span><span class="n">custom_parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_stecker_board</span><span class="p">(</span><span class="n">custom_parser</span><span class="o">.</span><span class="n">stecker_pair</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stecker_board</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_rotors</span><span class="p">(</span><span class="n">custom_parser</span><span class="o">.</span><span class="n">rotor_order</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">custom_parser</span><span class="o">.</span><span class="n">rotor_order</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">custom_parser</span><span class="o">.</span><span class="n">rotor_order</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_rotors_intial_position</span><span class="p">(</span><span class="n">custom_parser</span><span class="o">.</span><span class="n">start_position</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_ring_setting</span><span class="p">(</span><span class="n">custom_parser</span><span class="o">.</span><span class="n">ring_setting</span><span class="p">)</span>
+        <span class="n">processed_input</span> <span class="o">=</span> <span class="n">custom_parser</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="n">processed_input</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">ord</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">65</span> <span class="ow">or</span> <span class="nb">ord</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="o">&gt;</span> <span class="o">+</span><span class="mi">90</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">step_rotors</span><span class="p">()</span>
+                <span class="c1">#print(&quot;fast&quot;, self.fast_counter, &quot;med&quot;, self.medium_counter, &quot;slowest&quot;, self.slow_counter)</span>
+                <span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stecker_board_output</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+                <span class="c1">#print(&#39;z:&#39;, z)</span>
+                <span class="n">forward_encode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+                <span class="c1">#print(forward_encode)</span>
+                <span class="n">lamp_outout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reflector_result</span><span class="p">(</span><span class="n">forward_encode</span><span class="p">)</span>
+                <span class="n">reverse_encode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reverse</span><span class="p">(</span><span class="n">lamp_outout</span><span class="p">)</span>
+                <span class="c1">#print(reverse_encode, &quot;resafd&quot;)</span>
+                <span class="n">steckerboard_final</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stecker_board_output</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="n">reverse_encode</span> <span class="o">+</span> <span class="mi">65</span><span class="p">))</span>
+                <span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">steckerboard_final</span><span class="p">)</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;fast&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fast_counter</span><span class="p">,</span> <span class="s2">&quot;med&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">medium_counter</span><span class="p">,</span> <span class="s2">&quot;slowest&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">slow_counter</span><span class="p">,</span> <span class="s1">&#39;output&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;message&#39;</span><span class="p">:(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output</span><span class="p">))})</span></div>
+
+
+<div class="viewcode-block" id="M3.step_rotors"><a class="viewcode-back" href="../../Engima.html#ciphers.Engima.M3.step_rotors">[docs]</a>    <span class="k">def</span> <span class="nf">step_rotors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Steps the User Chosen Rotors of the Enigma Machine for each character.</span>
 <span class="sd">            The Middle Rotor does  contain the double step flaw.</span>
@@ -220,7 +263,7 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">medium_counter</span> <span class="o">&gt;</span> <span class="mi">25</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">medium_counter</span> <span class="o">=</span> <span class="mi">0</span></div>
 
-<div class="viewcode-block" id="M3.set_rotors"><a class="viewcode-back" href="../Engima.html#Engima.M3.set_rotors">[docs]</a>    <span class="k">def</span> <span class="nf">set_rotors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">slow</span><span class="p">,</span> <span class="n">medium</span><span class="p">,</span> <span class="n">fast</span><span class="p">):</span>
+<div class="viewcode-block" id="M3.set_rotors"><a class="viewcode-back" href="../../Engima.html#ciphers.Engima.M3.set_rotors">[docs]</a>    <span class="k">def</span> <span class="nf">set_rotors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">slow</span><span class="p">,</span> <span class="n">medium</span><span class="p">,</span> <span class="n">fast</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Sets the Rotors to use from User Input.</span>
 
@@ -236,11 +279,11 @@
 <span class="sd">            ValueError: The passed in rotor string is not a valid integer</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fast_rotor</span> <span class="o">=</span> <span class="n">rotor_choices</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">fast</span><span class="p">)]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">medium_rotor</span> <span class="o">=</span> <span class="n">rotor_choices</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">medium</span><span class="p">)]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">slow_rotor</span> <span class="o">=</span> <span class="n">rotor_choices</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">slow</span><span class="p">)]</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fast_rotor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rotor_choices</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">fast</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">medium_rotor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rotor_choices</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">medium</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">slow_rotor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rotor_choices</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">slow</span><span class="p">)]</span></div>
 
-<div class="viewcode-block" id="M3.set_rotors_intial_position"><a class="viewcode-back" href="../Engima.html#Engima.M3.set_rotors_intial_position">[docs]</a>    <span class="k">def</span> <span class="nf">set_rotors_intial_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_input</span><span class="p">):</span>
+<div class="viewcode-block" id="M3.set_rotors_intial_position"><a class="viewcode-back" href="../../Engima.html#ciphers.Engima.M3.set_rotors_intial_position">[docs]</a>    <span class="k">def</span> <span class="nf">set_rotors_intial_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_input</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Sets the Rotors starting position.</span>
 
@@ -255,27 +298,27 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">medium_counter</span> <span class="o">=</span> <span class="nb">ord</span><span class="p">(</span><span class="n">user_input</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="mi">65</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">slow_counter</span> <span class="o">=</span> <span class="nb">ord</span><span class="p">(</span><span class="n">user_input</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="mi">65</span></div>
 
-<div class="viewcode-block" id="M3.check_valid_char"><a class="viewcode-back" href="../Engima.html#Engima.M3.check_valid_char">[docs]</a>    <span class="k">def</span> <span class="nf">check_valid_char</span><span class="p">(</span><span class="n">suspected_char</span><span class="p">):</span>
+<div class="viewcode-block" id="M3.check_valid_char"><a class="viewcode-back" href="../../Engima.html#ciphers.Engima.M3.check_valid_char">[docs]</a>    <span class="k">def</span> <span class="nf">check_valid_char</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">suspected_char</span><span class="p">):</span>
         <span class="c1">#  check if the char is a valid uppercase ASCII.</span>
         <span class="k">if</span> <span class="nb">ord</span><span class="p">(</span><span class="n">suspected_char</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">65</span> <span class="ow">or</span> <span class="nb">ord</span><span class="p">(</span><span class="n">suspected_char</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">90</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">True</span></div>
-
-<div class="viewcode-block" id="M3.check_stecker_restrictions"><a class="viewcode-back" href="../Engima.html#Engima.M3.check_stecker_restrictions">[docs]</a>    <span class="k">def</span> <span class="nf">check_stecker_restrictions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stecker_pair</span><span class="p">):</span>
+    <span class="c1"># if this returns false, the system assumes everything is self-steckered</span>
+<div class="viewcode-block" id="M3.check_stecker_restrictions"><a class="viewcode-back" href="../../Engima.html#ciphers.Engima.M3.check_stecker_restrictions">[docs]</a>    <span class="k">def</span> <span class="nf">check_stecker_restrictions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stecker_pair</span><span class="p">):</span>
         <span class="n">no_spaces</span> <span class="o">=</span> <span class="n">stecker_pair</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
         <span class="n">split_pair</span> <span class="o">=</span> <span class="n">stecker_pair</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
         <span class="n">unique_chars</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">no_spaces</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">no_spaces</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">unique_chars</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">split_pair</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_pairs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">no_spaces</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">unique_chars</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">split_pair</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_pairs</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">no_spaces</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="k">return</span> <span class="kc">False</span>  <span class="c1"># need even number of pairs</span>
             <span class="k">return</span> <span class="kc">False</span>  <span class="c1"># raise the exception you reused a letter or had too many pairs</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">True</span></div>
 
-<div class="viewcode-block" id="M3.create_stecker_board"><a class="viewcode-back" href="../Engima.html#Engima.M3.create_stecker_board">[docs]</a>    <span class="k">def</span> <span class="nf">create_stecker_board</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wire_pairing</span><span class="p">):</span>
+<div class="viewcode-block" id="M3.create_stecker_board"><a class="viewcode-back" href="../../Engima.html#ciphers.Engima.M3.create_stecker_board">[docs]</a>    <span class="k">def</span> <span class="nf">create_stecker_board</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wire_pairing</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        thanks to Brian Neal for his superior option of using sets for uniqueness.</span>
+<span class="sd">        Thanks to Brian Neal&#39;s Enigma project as a reference steckerboard.</span>
 <span class="sd">        Creates the Stecker Board based off the pairs provided by the User.</span>
 <span class="sd">        Max amount of Pairs allowed are 10.</span>
 
@@ -286,7 +329,8 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            No return values but can raise aborts if the request is malformed.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">wire_pairing</span><span class="p">:</span>
+            <span class="k">return</span>
         <span class="n">string_pairs</span> <span class="o">=</span> <span class="n">wire_pairing</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>  <span class="c1"># list of the combos</span>
         <span class="n">pairs</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>  <span class="c1"># this will allow us to avoid checking repeats</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_stecker_restrictions</span><span class="p">(</span><span class="n">wire_pairing</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
@@ -298,9 +342,10 @@
                         <span class="n">pairs</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">return</span> <span class="kc">False</span>  <span class="c1"># raise an exception here so the api returns the error</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">stecker_board</span> <span class="o">=</span> <span class="n">pairs</span></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stecker_board</span> <span class="o">=</span> <span class="n">pairs</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;failed&quot;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="M3.stecker_board_output"><a class="viewcode-back" href="../Engima.html#Engima.M3.stecker_board_output">[docs]</a>    <span class="k">def</span> <span class="nf">stecker_board_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">char_to_be_stecker</span><span class="p">):</span>
+<div class="viewcode-block" id="M3.stecker_board_output"><a class="viewcode-back" href="../../Engima.html#ciphers.Engima.M3.stecker_board_output">[docs]</a>    <span class="k">def</span> <span class="nf">stecker_board_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">char_to_be_stecker</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The result of the character passing through the steckerboard.</span>
 <span class="sd">        Args:</span>
@@ -311,6 +356,8 @@
 <span class="sd">            of the steckerboard.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">stecker</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stecker_board</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">stecker</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">char_to_be_stecker</span>
         <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">stecker</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">char_to_be_stecker</span> <span class="ow">in</span> <span class="n">pair</span><span class="p">:</span>
                 <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">pair</span>
@@ -318,19 +365,19 @@
                     <span class="k">return</span> <span class="n">a</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">return</span> <span class="n">b</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">char_to_be_stecker</span></div>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">char_to_be_stecker</span></div>
 
-<div class="viewcode-block" id="M3.reflector_result"><a class="viewcode-back" href="../Engima.html#Engima.M3.reflector_result">[docs]</a>    <span class="k">def</span> <span class="nf">reflector_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">char</span><span class="p">):</span>
+<div class="viewcode-block" id="M3.reflector_result"><a class="viewcode-back" href="../../Engima.html#ciphers.Engima.M3.reflector_result">[docs]</a>    <span class="k">def</span> <span class="nf">reflector_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">char</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reflector</span><span class="p">[</span><span class="n">char</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="M3.set_ring_setting"><a class="viewcode-back" href="../Engima.html#Engima.M3.set_ring_setting">[docs]</a>    <span class="k">def</span> <span class="nf">set_ring_setting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_input</span><span class="p">):</span>
+<div class="viewcode-block" id="M3.set_ring_setting"><a class="viewcode-back" href="../../Engima.html#ciphers.Engima.M3.set_ring_setting">[docs]</a>    <span class="k">def</span> <span class="nf">set_ring_setting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_input</span><span class="p">):</span>
         <span class="n">user_input</span> <span class="o">=</span> <span class="n">user_input</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">right_rotor_ring</span> <span class="o">=</span> <span class="nb">ord</span><span class="p">(</span><span class="n">user_input</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">-</span> <span class="mi">65</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">middle_rotor_ring</span> <span class="o">=</span> <span class="nb">ord</span><span class="p">(</span><span class="n">user_input</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="mi">65</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">left_rotor_ring</span> <span class="o">=</span> <span class="nb">ord</span><span class="p">(</span><span class="n">user_input</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="mi">65</span></div>
 
-<div class="viewcode-block" id="M3.forward"><a class="viewcode-back" href="../Engima.html#Engima.M3.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
+<div class="viewcode-block" id="M3.forward"><a class="viewcode-back" href="../../Engima.html#ciphers.Engima.M3.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The character is passed through the machine right to left.</span>
 
@@ -355,14 +402,14 @@
                     <span class="n">ring</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">left_rotor_ring</span>
                     <span class="n">count</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">slow_counter</span>
                 <span class="n">trans</span> <span class="o">=</span> <span class="p">(((</span><span class="n">x</span> <span class="o">-</span> <span class="n">ring</span><span class="p">)</span> <span class="o">%</span> <span class="mi">26</span><span class="p">)</span> <span class="o">+</span> <span class="n">count</span><span class="p">)</span> <span class="o">%</span> <span class="mi">26</span>
-                <span class="n">encoded</span> <span class="o">=</span> <span class="n">rotor_choices</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="s1">&#39;wiring&#39;</span><span class="p">][</span><span class="n">trans</span><span class="p">]</span>
+                <span class="n">encoded</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rotor_choices</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="s1">&#39;wiring&#39;</span><span class="p">][</span><span class="n">trans</span><span class="p">]</span>
                 <span class="n">xx</span> <span class="o">=</span> <span class="p">(((</span><span class="nb">ord</span><span class="p">(</span><span class="n">encoded</span><span class="p">)</span> <span class="o">-</span> <span class="mi">65</span><span class="p">)</span> <span class="o">%</span> <span class="mi">26</span><span class="p">)</span> <span class="o">-</span> <span class="n">count</span><span class="p">)</span> <span class="o">%</span> <span class="mi">26</span>
                 <span class="n">beforeRing</span> <span class="o">=</span> <span class="p">(</span><span class="n">xx</span> <span class="o">+</span> <span class="n">ring</span><span class="p">)</span> <span class="o">%</span> <span class="mi">26</span>
                 <span class="nb">print</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="n">beforeRing</span> <span class="o">+</span> <span class="mi">65</span><span class="p">),</span> <span class="s2">&quot;----answer from wheel&quot;</span><span class="p">)</span>
                 <span class="n">x</span> <span class="o">=</span> <span class="n">beforeRing</span>
         <span class="k">return</span> <span class="n">x</span></div>
 
-<div class="viewcode-block" id="M3.reverse"><a class="viewcode-back" href="../Engima.html#Engima.M3.reverse">[docs]</a>    <span class="k">def</span> <span class="nf">reverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
+<div class="viewcode-block" id="M3.reverse"><a class="viewcode-back" href="../../Engima.html#ciphers.Engima.M3.reverse">[docs]</a>    <span class="k">def</span> <span class="nf">reverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The character is passed through the machine left to right.</span>
 
@@ -388,7 +435,7 @@
                     <span class="n">ring</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">left_rotor_ring</span>
                     <span class="n">count</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">slow_counter</span>
                 <span class="n">trans</span> <span class="o">=</span> <span class="p">(((</span><span class="n">x</span> <span class="o">-</span> <span class="n">ring</span><span class="p">)</span> <span class="o">%</span> <span class="mi">26</span><span class="p">)</span> <span class="o">+</span> <span class="n">count</span><span class="p">)</span> <span class="o">%</span> <span class="mi">26</span>
-                <span class="n">encoded</span> <span class="o">=</span> <span class="n">rotor_choices</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="s1">&#39;wiring&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">bet</span><span class="p">[</span><span class="n">trans</span><span class="p">])</span>
+                <span class="n">encoded</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rotor_choices</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="s1">&#39;wiring&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">bet</span><span class="p">[</span><span class="n">trans</span><span class="p">])</span>
                 <span class="n">xx</span> <span class="o">=</span> <span class="p">(</span><span class="n">encoded</span> <span class="o">-</span> <span class="n">count</span><span class="p">)</span> <span class="o">%</span> <span class="mi">26</span>
                 <span class="n">beforeRing</span> <span class="o">=</span> <span class="p">(</span><span class="n">xx</span> <span class="o">+</span> <span class="n">ring</span><span class="p">)</span> <span class="o">%</span> <span class="mi">26</span>
                 <span class="k">if</span> <span class="n">y</span> <span class="ow">is</span> <span class="mi">3</span><span class="p">:</span>
@@ -396,48 +443,8 @@
                 <span class="n">x</span> <span class="o">=</span> <span class="n">beforeRing</span>
         <span class="k">return</span> <span class="n">x</span></div>
 
-<div class="viewcode-block" id="M3.vienna"><a class="viewcode-back" href="../Engima.html#Engima.M3.vienna">[docs]</a>    <span class="k">def</span> <span class="nf">vienna</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_input</span><span class="p">,</span> <span class="n">stecker_pairs</span><span class="p">,</span> <span class="n">ring_setting</span><span class="p">,</span> <span class="n">rotor_order</span><span class="p">,</span> <span class="n">rotor_position</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            user_input: The message to be encoded/decoded.</span>
-<span class="sd">            stecker_pairs: The user provided pairs for the stecker.</span>
-<span class="sd">            ring_setting:The user provided ring settings.</span>
-<span class="sd">            rotor_order:The user provided order of the rotors.</span>
-<span class="sd">            rotor_position:The starting postion for the rotors.</span>
 
 
-<span class="sd">        Returns:</span>
-<span class="sd">            The message decoded/encoded.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="n">output</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">create_stecker_board</span><span class="p">(</span><span class="n">stecker_pairs</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stecker_board</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_rotors</span><span class="p">(</span><span class="n">rotor_order</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">rotor_order</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">rotor_order</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_rotors_intial_position</span><span class="p">(</span><span class="n">rotor_position</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_ring_setting</span><span class="p">(</span><span class="n">ring_setting</span><span class="p">)</span>
-        <span class="n">processed_input</span> <span class="o">=</span> <span class="n">user_input</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-
-        <span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="n">processed_input</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">ord</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">65</span> <span class="ow">or</span> <span class="nb">ord</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="o">&gt;</span> <span class="o">+</span><span class="mi">90</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">step_rotors</span><span class="p">()</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;fast&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fast_counter</span><span class="p">,</span> <span class="s2">&quot;med&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">medium_counter</span><span class="p">,</span> <span class="s2">&quot;slowest&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">slow_counter</span><span class="p">)</span>
-                <span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stecker_board_output</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;z:&#39;</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
-                <span class="n">forward_encode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
-                <span class="nb">print</span><span class="p">(</span><span class="n">forward_encode</span><span class="p">)</span>
-                <span class="n">lamp_outout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reflector_result</span><span class="p">(</span><span class="n">forward_encode</span><span class="p">)</span>
-                <span class="n">reverse_encode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reverse</span><span class="p">(</span><span class="n">lamp_outout</span><span class="p">)</span>
-                <span class="nb">print</span><span class="p">(</span><span class="n">reverse_encode</span><span class="p">,</span> <span class="s2">&quot;resafd&quot;</span><span class="p">)</span>
-                <span class="n">steckerboard_final</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stecker_board_output</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="n">reverse_encode</span> <span class="o">+</span> <span class="mi">65</span><span class="p">))</span>
-                <span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">steckerboard_final</span><span class="p">)</span>
-
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span>
-            <span class="s2">&quot;fast&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fast_counter</span><span class="p">,</span> <span class="s2">&quot;med&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">medium_counter</span><span class="p">,</span> <span class="s2">&quot;slowest&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">slow_counter</span><span class="p">,</span> <span class="s1">&#39;output&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output</span><span class="p">))</span></div>
     <span class="c1">#: this will become it&#39;s own class.</span>
     <span class="n">rotor_choices</span> <span class="o">=</span> <span class="p">{</span>
         <span class="mi">1</span><span class="p">:</span> <span class="p">{</span>
@@ -499,15 +506,15 @@
 
     
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
     
 
   
 
-  <script type="text/javascript" src="../_static/js/theme.js"></script>
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
   <script type="text/javascript">
       jQuery(function () {

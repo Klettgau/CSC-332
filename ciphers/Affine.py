@@ -2,6 +2,11 @@ from flask_restful import Resource,abort
 from ciphers.CustomParser import Parsely
 # y = mx+b
 class Affine(Resource):
+    """
+    wefewf
+
+
+    """
     def get(self):
         parser=Parsely.parser_affine(Parsely)
         args = parser.parse_args()

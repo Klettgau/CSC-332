@@ -81,12 +81,21 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Julius.html">Julius module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Julius.html">Caesar Cipher</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Affine.html">Affine module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Vigenere.html">Vigenere module</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Jefferson module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Engima.html">Engima module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Example</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">clean</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Affine.html">Affine module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CustomParser.html">CustomParser module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Engima.html">Engima module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Jefferson module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Julius.html">Caesar Cipher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vigenere.html">Vigenere module</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -151,16 +160,25 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-Jefferson">
-<span id="jefferson-module"></span><h1>Jefferson module<a class="headerlink" href="#module-Jefferson" title="Permalink to this headline">¶</a></h1>
-<dl class="function">
-<dt id="Jefferson.decode">
-<code class="descclassname">Jefferson.</code><code class="descname">decode</code><span class="sig-paren">(</span><em>encodeInput</em>, <em>shiftFactor</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Jefferson.html#decode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Jefferson.decode" title="Permalink to this definition">¶</a></dt>
+  <div class="section" id="module-ciphers.Jefferson">
+<span id="jefferson-module"></span><h1>Jefferson module<a class="headerlink" href="#module-ciphers.Jefferson" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="ciphers.Jefferson.Jefferson">
+<em class="property">class </em><code class="descclassname">ciphers.Jefferson.</code><code class="descname">Jefferson</code><a class="reference internal" href="_modules/ciphers/Jefferson.html#Jefferson"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ciphers.Jefferson.Jefferson" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">flask_restful.Resource</span></code></p>
+<dl class="method">
+<dt id="ciphers.Jefferson.Jefferson.check_parameters">
+<code class="descname">check_parameters</code><span class="sig-paren">(</span><em>wheel_order</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ciphers/Jefferson.html#Jefferson.check_parameters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ciphers.Jefferson.Jefferson.check_parameters" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="function">
-<dt id="Jefferson.encode">
-<code class="descclassname">Jefferson.</code><code class="descname">encode</code><span class="sig-paren">(</span><em>userInput</em>, <em>shift</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Jefferson.html#encode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Jefferson.encode" title="Permalink to this definition">¶</a></dt>
+<dl class="method">
+<dt id="ciphers.Jefferson.Jefferson.decode">
+<code class="descname">decode</code><span class="sig-paren">(</span><em>encodeInput</em>, <em>shiftFactor</em>, <em>wheel_order</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ciphers/Jefferson.html#Jefferson.decode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ciphers.Jefferson.Jefferson.decode" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ciphers.Jefferson.Jefferson.encode">
+<code class="descname">encode</code><span class="sig-paren">(</span><em>userInput</em>, <em>shift</em>, <em>wheel_order</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ciphers/Jefferson.html#Jefferson.encode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ciphers.Jefferson.Jefferson.encode" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is a test for jeff</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -177,10 +195,22 @@
 <p>Returns:</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="Jefferson.highLight">
-<code class="descclassname">Jefferson.</code><code class="descname">highLight</code><span class="sig-paren">(</span><em>wheel</em>, <em>userInput</em>, <em>shift</em>, <em>pos</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Jefferson.html#highLight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Jefferson.highLight" title="Permalink to this definition">¶</a></dt>
+<dl class="method">
+<dt id="ciphers.Jefferson.Jefferson.get">
+<code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ciphers/Jefferson.html#Jefferson.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ciphers.Jefferson.Jefferson.get" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ciphers.Jefferson.Jefferson.methods">
+<code class="descname">methods</code><em class="property"> = {'GET'}</em><a class="headerlink" href="#ciphers.Jefferson.Jefferson.methods" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ciphers.Jefferson.Jefferson.not_random">
+<code class="descname">not_random</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ciphers/Jefferson.html#Jefferson.not_random"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ciphers.Jefferson.Jefferson.not_random" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
 
 </div>
 

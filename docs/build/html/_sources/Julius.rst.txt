@@ -1,7 +1,8 @@
 Caesar Cipher
 =============
 
-.. automodule:: Julius
+.. automodule:: ciphers.Julius
+.. autoclass:: Julius
     :members:
     :undoc-members:
     :show-inheritance:

@@ -1,7 +1,8 @@
 Vigenere module
 ===============
 
-.. automodule:: Vigenere
+.. automodule:: ciphers.Vigenere
+.. autoclass:: Vig
     :members:
     :undoc-members:
     :show-inheritance:

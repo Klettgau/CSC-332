@@ -62,8 +62,8 @@ class Jefferson(Resource):
             return False
         return True
 
-    def check_digit(self,wheel_order):
-        return(wheel_order..isdigit())
+   # def check_digit(self,wheel_order):
+   #     return(wheel_order..isdigit())
 
 
     def not_random(self):

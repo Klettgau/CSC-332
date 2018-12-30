@@ -17,6 +17,7 @@ Welcome to heer's documentation!
    Jefferson
    Engima
    examples
+   modules
 
 
 

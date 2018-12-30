@@ -81,12 +81,21 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Julius.html">Julius module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Julius.html">Caesar Cipher</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Affine.html">Affine module</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Vigenere module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Jefferson.html">Jefferson module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Engima.html">Engima module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Example</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">clean</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Affine.html">Affine module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CustomParser.html">CustomParser module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Engima.html">Engima module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Jefferson.html">Jefferson module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Julius.html">Caesar Cipher</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Vigenere module</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -151,47 +160,38 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-Vigenere">
-<span id="vigenere-module"></span><h1>Vigenere module<a class="headerlink" href="#module-Vigenere" title="Permalink to this headline">¶</a></h1>
-<dl class="function">
-<dt id="Vigenere.correct_print">
-<code class="descclassname">Vigenere.</code><code class="descname">correct_print</code><span class="sig-paren">(</span><em>org_char</em>, <em>new_char</em>, <em>x</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Vigenere.html#correct_print"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Vigenere.correct_print" title="Permalink to this definition">¶</a></dt>
+  <div class="section" id="module-ciphers.Vigenere">
+<span id="vigenere-module"></span><h1>Vigenere module<a class="headerlink" href="#module-ciphers.Vigenere" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="ciphers.Vigenere.Vig">
+<em class="property">class </em><code class="descclassname">ciphers.Vigenere.</code><code class="descname">Vig</code><a class="reference internal" href="_modules/ciphers/Vigenere.html#Vig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ciphers.Vigenere.Vig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">flask_restful.Resource</span></code></p>
+<dl class="method">
+<dt id="ciphers.Vigenere.Vig.decode">
+<code class="descname">decode</code><span class="sig-paren">(</span><em>cipher</em>, <em>keyword</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ciphers/Vigenere.html#Vig.decode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ciphers.Vigenere.Vig.decode" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="function">
-<dt id="Vigenere.decode">
-<code class="descclassname">Vigenere.</code><code class="descname">decode</code><span class="sig-paren">(</span><em>cipher</em>, <em>keyword</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Vigenere.html#decode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Vigenere.decode" title="Permalink to this definition">¶</a></dt>
+<dl class="method">
+<dt id="ciphers.Vigenere.Vig.encode">
+<code class="descname">encode</code><span class="sig-paren">(</span><em>plainext</em>, <em>keyword</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ciphers/Vigenere.html#Vig.encode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ciphers.Vigenere.Vig.encode" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="function">
-<dt id="Vigenere.encode">
-<code class="descclassname">Vigenere.</code><code class="descname">encode</code><span class="sig-paren">(</span><em>plainext</em>, <em>keyword</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Vigenere.html#encode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Vigenere.encode" title="Permalink to this definition">¶</a></dt>
+<dl class="method">
+<dt id="ciphers.Vigenere.Vig.get">
+<code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ciphers/Vigenere.html#Vig.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ciphers.Vigenere.Vig.get" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="function">
-<dt id="Vigenere.get_alphabet">
-<code class="descclassname">Vigenere.</code><code class="descname">get_alphabet</code><span class="sig-paren">(</span><em>char_to_be_converted</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Vigenere.html#get_alphabet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Vigenere.get_alphabet" title="Permalink to this definition">¶</a></dt>
+<dl class="attribute">
+<dt id="ciphers.Vigenere.Vig.methods">
+<code class="descname">methods</code><em class="property"> = {'GET'}</em><a class="headerlink" href="#ciphers.Vigenere.Vig.methods" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="function">
-<dt id="Vigenere.print_changes">
-<code class="descclassname">Vigenere.</code><code class="descname">print_changes</code><span class="sig-paren">(</span><em>line_num</em>, <em>org_char</em>, <em>new_char</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Vigenere.html#print_changes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Vigenere.print_changes" title="Permalink to this definition">¶</a></dt>
+<dl class="method">
+<dt id="ciphers.Vigenere.Vig.print_tabula">
+<code class="descname">print_tabula</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ciphers/Vigenere.html#Vig.print_tabula"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ciphers.Vigenere.Vig.print_tabula" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="function">
-<dt id="Vigenere.print_tabula">
-<code class="descclassname">Vigenere.</code><code class="descname">print_tabula</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Vigenere.html#print_tabula"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Vigenere.print_tabula" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="Vigenere.print_text">
-<code class="descclassname">Vigenere.</code><code class="descname">print_text</code><span class="sig-paren">(</span><em>user_text</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Vigenere.html#print_text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Vigenere.print_text" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="Vigenere.printy_tabula">
-<code class="descclassname">Vigenere.</code><code class="descname">printy_tabula</code><span class="sig-paren">(</span><em>x</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Vigenere.html#printy_tabula"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Vigenere.printy_tabula" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+</dd></dl>
 
 </div>
 

@@ -1,7 +1,7 @@
 Affine module
 =============
-
-.. automodule:: Affine
+.. automodule:: ciphers.Affine
+.. autoclass:: Affine
     :members:
     :undoc-members:
     :show-inheritance:

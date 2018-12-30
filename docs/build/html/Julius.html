@@ -87,6 +87,15 @@
 <li class="toctree-l1"><a class="reference internal" href="Jefferson.html">Jefferson module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Engima.html">Engima module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Example</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">clean</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Affine.html">Affine module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CustomParser.html">CustomParser module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Engima.html">Engima module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Jefferson.html">Jefferson module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Caesar Cipher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vigenere.html">Vigenere module</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -151,32 +160,33 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-Julius">
-<span id="caesar-cipher"></span><h1>Caesar Cipher<a class="headerlink" href="#module-Julius" title="Permalink to this headline">¶</a></h1>
-<dl class="function">
-<dt id="Julius.decode">
-<code class="descclassname">Julius.</code><code class="descname">decode</code><span class="sig-paren">(</span><em>encoded</em>, <em>key</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Julius.html#decode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Julius.decode" title="Permalink to this definition">¶</a></dt>
+  <div class="section" id="module-ciphers.Julius">
+<span id="caesar-cipher"></span><h1>Caesar Cipher<a class="headerlink" href="#module-ciphers.Julius" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="ciphers.Julius.Julius">
+<em class="property">class </em><code class="descclassname">ciphers.Julius.</code><code class="descname">Julius</code><a class="reference internal" href="_modules/ciphers/Julius.html#Julius"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ciphers.Julius.Julius" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">flask_restful.Resource</span></code></p>
+<dl class="method">
+<dt id="ciphers.Julius.Julius.decode">
+<code class="descname">decode</code><span class="sig-paren">(</span><em>encoded</em>, <em>key</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ciphers/Julius.html#Julius.decode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ciphers.Julius.Julius.decode" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="function">
-<dt id="Julius.display_values">
-<code class="descclassname">Julius.</code><code class="descname">display_values</code><span class="sig-paren">(</span><em>key</em>, <em>input</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Julius.html#display_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Julius.display_values" title="Permalink to this definition">¶</a></dt>
+<dl class="method">
+<dt id="ciphers.Julius.Julius.encode">
+<code class="descname">encode</code><span class="sig-paren">(</span><em>plain_text</em>, <em>key</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ciphers/Julius.html#Julius.encode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ciphers.Julius.Julius.encode" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="function">
-<dt id="Julius.encode">
-<code class="descclassname">Julius.</code><code class="descname">encode</code><span class="sig-paren">(</span><em>plain_text</em>, <em>key</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Julius.html#encode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Julius.encode" title="Permalink to this definition">¶</a></dt>
+<dl class="method">
+<dt id="ciphers.Julius.Julius.get">
+<code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ciphers/Julius.html#Julius.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ciphers.Julius.Julius.get" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="function">
-<dt id="Julius.pretty_print">
-<code class="descclassname">Julius.</code><code class="descname">pretty_print</code><span class="sig-paren">(</span><em>prev</em>, <em>apres</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Julius.html#pretty_print"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Julius.pretty_print" title="Permalink to this definition">¶</a></dt>
+<dl class="attribute">
+<dt id="ciphers.Julius.Julius.methods">
+<code class="descname">methods</code><em class="property"> = {'GET'}</em><a class="headerlink" href="#ciphers.Julius.Julius.methods" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="function">
-<dt id="Julius.print_text">
-<code class="descclassname">Julius.</code><code class="descname">print_text</code><span class="sig-paren">(</span><em>user_string</em>, <em>mode</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Julius.html#print_text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Julius.print_text" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+</dd></dl>
 
 </div>
 
