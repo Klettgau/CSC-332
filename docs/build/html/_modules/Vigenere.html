@@ -1,0 +1,284 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Vigenere &mdash; heer 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> heer
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Julius.html">Caesar Cipher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Affine.html">Affine module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Vigenere.html">Vigenere module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Jefferson.html">Jefferson module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Engima.html">Engima module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Example</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">heer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Module code</a> &raquo;</li>
+        
+      <li>Vigenere</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for Vigenere</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">Colors</span>
+
+<span class="n">color</span> <span class="o">=</span> <span class="n">Colors</span><span class="o">.</span><span class="n">textMod</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="print_tabula"><a class="viewcode-back" href="../Vigenere.html#Vigenere.print_tabula">[docs]</a><span class="k">def</span> <span class="nf">print_tabula</span><span class="p">():</span>
+    <span class="n">recta</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">26</span><span class="p">):</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">26</span><span class="p">):</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">line</span> <span class="o">+</span> <span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mi">65</span> <span class="o">+</span> <span class="p">((</span><span class="n">ii</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span> <span class="o">%</span> <span class="mi">26</span><span class="p">)))</span>
+        <span class="n">recta</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">recta</span></div>
+
+
+<div class="viewcode-block" id="printy_tabula"><a class="viewcode-back" href="../Vigenere.html#Vigenere.printy_tabula">[docs]</a><span class="k">def</span> <span class="nf">printy_tabula</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">recta</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">26</span><span class="p">):</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">26</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">x</span><span class="p">:</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="n">line</span> <span class="o">+</span> <span class="n">color</span><span class="o">.</span><span class="n">green</span> <span class="o">+</span> <span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mi">65</span> <span class="o">+</span> <span class="p">((</span><span class="n">ii</span><span class="p">)</span> <span class="o">%</span> <span class="mi">26</span><span class="p">)))</span> <span class="o">+</span> <span class="n">color</span><span class="o">.</span><span class="n">end</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">ii</span> <span class="o">==</span> <span class="n">y</span><span class="p">:</span>
+                    <span class="n">line</span> <span class="o">=</span> <span class="n">line</span> <span class="o">+</span> <span class="n">color</span><span class="o">.</span><span class="n">blue</span> <span class="o">+</span> <span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mi">65</span> <span class="o">+</span> <span class="p">((</span><span class="n">ii</span><span class="p">)</span> <span class="o">%</span> <span class="mi">26</span><span class="p">)))</span> <span class="o">+</span> <span class="n">color</span><span class="o">.</span><span class="n">end</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">line</span> <span class="o">=</span> <span class="n">line</span> <span class="o">+</span> <span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mi">65</span> <span class="o">+</span> <span class="p">((</span><span class="n">ii</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span> <span class="o">%</span> <span class="mi">26</span><span class="p">)))</span>
+        <span class="n">recta</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">recta</span></div>
+
+
+<div class="viewcode-block" id="print_changes"><a class="viewcode-back" href="../Vigenere.html#Vigenere.print_changes">[docs]</a><span class="k">def</span> <span class="nf">print_changes</span><span class="p">(</span><span class="n">line_num</span><span class="p">,</span> <span class="n">org_char</span><span class="p">,</span> <span class="n">new_char</span><span class="p">):</span>
+    <span class="n">tabby</span> <span class="o">=</span> <span class="n">print_tabula</span><span class="p">()</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">line_num</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">26</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="mi">65</span> <span class="o">+</span> <span class="n">ii</span><span class="p">)</span> <span class="o">==</span> <span class="nb">ord</span><span class="p">(</span><span class="n">org_char</span><span class="p">):</span>
+            <span class="n">line</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">color</span><span class="o">.</span><span class="n">blue</span> <span class="o">+</span> <span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mi">65</span> <span class="o">+</span> <span class="p">((</span><span class="n">ii</span><span class="p">)</span> <span class="o">%</span> <span class="mi">26</span><span class="p">)))</span> <span class="o">+</span> <span class="n">color</span><span class="o">.</span><span class="n">end</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="mi">65</span> <span class="o">+</span> <span class="n">ii</span><span class="p">)</span> <span class="o">==</span> <span class="nb">ord</span><span class="p">(</span><span class="n">new_char</span><span class="p">):</span>
+            <span class="n">line</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">color</span><span class="o">.</span><span class="n">green</span> <span class="o">+</span> <span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mi">65</span> <span class="o">+</span> <span class="p">((</span><span class="n">ii</span><span class="p">)</span> <span class="o">%</span> <span class="mi">26</span><span class="p">)))</span> <span class="o">+</span> <span class="n">color</span><span class="o">.</span><span class="n">end</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ii</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">line</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">color</span><span class="o">.</span><span class="n">randy</span> <span class="o">+</span> <span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mi">65</span> <span class="o">+</span> <span class="p">((</span><span class="n">ii</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span> <span class="o">%</span> <span class="mi">26</span><span class="p">)))</span> <span class="o">+</span> <span class="n">color</span><span class="o">.</span><span class="n">end</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">line</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">chr</span><span class="p">(</span><span class="mi">65</span> <span class="o">+</span> <span class="p">((</span><span class="n">ii</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span> <span class="o">%</span> <span class="mi">26</span><span class="p">))))</span>
+    <span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;: Before&quot;</span><span class="p">,</span> <span class="n">org_char</span><span class="p">,</span> <span class="s2">&quot;:After&quot;</span><span class="p">,</span> <span class="n">new_char</span><span class="p">,</span> <span class="s2">&quot;:KeyWord&quot;</span><span class="p">,</span> <span class="nb">chr</span><span class="p">(</span><span class="n">line_num</span> <span class="o">+</span> <span class="mi">65</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="print_text"><a class="viewcode-back" href="../Vigenere.html#Vigenere.print_text">[docs]</a><span class="k">def</span> <span class="nf">print_text</span><span class="p">(</span><span class="n">user_text</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">user_text</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="encode"><a class="viewcode-back" href="../Vigenere.html#Vigenere.encode">[docs]</a><span class="k">def</span> <span class="nf">encode</span><span class="p">(</span><span class="n">plainext</span><span class="p">,</span> <span class="n">keyword</span><span class="p">):</span>
+    <span class="c1">#  key(row) column(plaintext)</span>
+    <span class="n">cipher_text</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">plainext</span><span class="p">)):</span>
+        <span class="n">print_changes</span><span class="p">(</span><span class="n">get_alphabet</span><span class="p">(</span><span class="n">keyword</span><span class="p">[</span><span class="n">c</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">keyword</span><span class="p">)]),</span> <span class="n">plainext</span><span class="p">[</span><span class="n">c</span><span class="p">],</span>
+                      <span class="nb">chr</span><span class="p">((((</span><span class="nb">ord</span><span class="p">(</span><span class="n">plainext</span><span class="p">[</span><span class="n">c</span><span class="p">])</span> <span class="o">-</span> <span class="mi">65</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">keyword</span><span class="p">[</span><span class="n">c</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">keyword</span><span class="p">)])</span> <span class="o">-</span> <span class="mi">65</span><span class="p">))</span> <span class="o">%</span> <span class="mi">26</span><span class="p">)</span> <span class="o">+</span> <span class="mi">65</span><span class="p">))</span>
+        <span class="n">cipher_text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">chr</span><span class="p">((((</span><span class="nb">ord</span><span class="p">(</span><span class="n">plainext</span><span class="p">[</span><span class="n">c</span><span class="p">])</span> <span class="o">-</span> <span class="mi">65</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">keyword</span><span class="p">[</span><span class="n">c</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">keyword</span><span class="p">)])</span> <span class="o">-</span> <span class="mi">65</span><span class="p">))</span> <span class="o">%</span> <span class="mi">26</span><span class="p">)</span> <span class="o">+</span> <span class="mi">65</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">cipher_text</span></div>
+
+
+<div class="viewcode-block" id="correct_print"><a class="viewcode-back" href="../Vigenere.html#Vigenere.correct_print">[docs]</a><span class="k">def</span> <span class="nf">correct_print</span><span class="p">(</span><span class="n">org_char</span><span class="p">,</span> <span class="n">new_char</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="c1"># we use the x,y to find the row and column</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">for</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">26</span><span class="p">):</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">output</span> <span class="o">+</span> <span class="nb">chr</span><span class="p">(((</span><span class="n">count</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span> <span class="o">%</span> <span class="mi">26</span><span class="p">)</span> <span class="o">+</span> <span class="mi">65</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_alphabet"><a class="viewcode-back" href="../Vigenere.html#Vigenere.get_alphabet">[docs]</a><span class="k">def</span> <span class="nf">get_alphabet</span><span class="p">(</span><span class="n">char_to_be_converted</span><span class="p">):</span>
+    <span class="c1"># this function takes in a-z and returns 0-25</span>
+    <span class="k">return</span> <span class="nb">ord</span><span class="p">(</span><span class="n">char_to_be_converted</span><span class="p">)</span> <span class="o">-</span> <span class="mi">65</span></div>
+
+
+<div class="viewcode-block" id="decode"><a class="viewcode-back" href="../Vigenere.html#Vigenere.decode">[docs]</a><span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="n">cipher</span><span class="p">,</span> <span class="n">keyword</span><span class="p">):</span>
+    <span class="n">tabula</span> <span class="o">=</span> <span class="n">print_tabula</span><span class="p">()</span>  <span class="c1"># list of lists that are the tabula</span>
+    <span class="n">plain</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cipher</span><span class="p">)):</span>
+        <span class="n">plain</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">chr</span><span class="p">((((</span><span class="nb">ord</span><span class="p">(</span><span class="n">cipher</span><span class="p">[</span><span class="n">c</span><span class="p">])</span> <span class="o">-</span> <span class="mi">65</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">keyword</span><span class="p">[</span><span class="n">c</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">keyword</span><span class="p">)])</span> <span class="o">-</span> <span class="mi">65</span><span class="p">))</span> <span class="o">%</span> <span class="mi">26</span><span class="p">)</span> <span class="o">+</span> <span class="mi">65</span><span class="p">))</span>
+        <span class="n">print_changes</span><span class="p">(</span><span class="n">get_alphabet</span><span class="p">(</span><span class="n">keyword</span><span class="p">[</span><span class="n">c</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">keyword</span><span class="p">)]),</span> <span class="n">cipher</span><span class="p">[</span><span class="n">c</span><span class="p">],</span>
+                      <span class="nb">chr</span><span class="p">((((</span><span class="nb">ord</span><span class="p">(</span><span class="n">cipher</span><span class="p">[</span><span class="n">c</span><span class="p">])</span> <span class="o">-</span> <span class="mi">65</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">keyword</span><span class="p">[</span><span class="n">c</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">keyword</span><span class="p">)])</span> <span class="o">-</span> <span class="mi">65</span><span class="p">))</span> <span class="o">%</span> <span class="mi">26</span><span class="p">)</span> <span class="o">+</span> <span class="mi">65</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">plain</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, klettgau
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
