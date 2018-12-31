@@ -9,11 +9,12 @@ Engima module
     :members:
     :undoc-members:
     :show-inheritance:
+
 *********
 Rotor Dic
 *********
 sadasdasdasd::
-    
+
     rotor_choices = {
         1: {
             'wiring': 'EKMFLGDQVZNTOWYHXUSPAIBRCJ',
@@ -35,13 +36,14 @@ sadasdasdasd::
             'wiring': 'VZBRGITYUPSDNHLXAWMJQOFECK',
             'step': 'Z'
         },
-    }  
+    }
+  
 **************    
 Reflector Dict
 **************
-..code-block:: python
-    These are the entries::
-        {
-            'reflector_b': 'YRUHQSLDPXNGOKMIEBFZCWVJAT',  # b reflector
-            'reflector_c': 'FVPJIAOYEDRZXWGCTKUQSBNMHL'  # c reflector
-        }
+These are the entries::
+
+    {
+        'reflector_b': 'YRUHQSLDPXNGOKMIEBFZCWVJAT',  # b reflector
+        'reflector_c': 'FVPJIAOYEDRZXWGCTKUQSBNMHL'  # c reflector
+    }
