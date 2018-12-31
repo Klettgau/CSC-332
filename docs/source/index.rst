@@ -16,7 +16,6 @@ Welcome to heer's documentation!
    Vigenere
    Jefferson
    Engima
-   examples
    modules
 
 

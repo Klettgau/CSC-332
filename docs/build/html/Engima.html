@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Example" href="examples.html" />
+    <link rel="next" title="clean" href="modules.html" />
     <link rel="prev" title="Jefferson module" href="Jefferson.html" /> 
 
   
@@ -86,14 +86,11 @@
 <li class="toctree-l1"><a class="reference internal" href="Vigenere.html">Vigenere module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Jefferson.html">Jefferson module</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Engima module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#module-ciphers.Engima"><code class="docutils literal notranslate"><span class="pre">M3</span> <span class="pre">Enigma</span></code> class</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#rotor-dic">Rotor Dic</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#reflector-dict">Reflector Dict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ciphers.Engima"><code class="docutils literal notranslate"><span class="pre">M3</span> <span class="pre">Enigma</span></code> class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rotor-dic">Rotor Dic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reflector-dict">Reflector Dict</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">clean</a></li>
 </ul>
 
@@ -413,40 +410,51 @@ The Middle Rotor does  contain the double step flaw.</p>
 
 </dd></dl>
 
+</div>
 <div class="section" id="rotor-dic">
-<h3>Rotor Dic<a class="headerlink" href="#rotor-dic" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="s2">&quot;1&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;step&quot;</span><span class="o">:</span> <span class="s2">&quot;Q&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;wiring&quot;</span><span class="o">:</span> <span class="s2">&quot;EKMFLGDQVZNTOWYHXUSPAIBRCJ&quot;</span>
-<span class="p">},</span>
-<span class="s2">&quot;2&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;step&quot;</span><span class="o">:</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;wiring&quot;</span><span class="o">:</span> <span class="s2">&quot;AJDKSIRUXBLHWTMCQGZNPYFVOE&quot;</span>
-<span class="p">},</span>
-<span class="s2">&quot;3&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;step&quot;</span><span class="o">:</span> <span class="s2">&quot;V&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;wiring&quot;</span><span class="o">:</span> <span class="s2">&quot;BDFHJLCPRTXVZNYEIWGAKMUSQO&quot;</span>
-<span class="p">},</span>
-<span class="s2">&quot;4&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;step&quot;</span><span class="o">:</span> <span class="s2">&quot;J&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;wiring&quot;</span><span class="o">:</span> <span class="s2">&quot;ESOVPZJAYQUIRHXLNFTGKDCMWB&quot;</span>
-<span class="p">},</span>
-<span class="s2">&quot;5&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;step&quot;</span><span class="o">:</span> <span class="s2">&quot;Z&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;wiring&quot;</span><span class="o">:</span> <span class="s2">&quot;VZBRGITYUPSDNHLXAWMJQOFECK&quot;</span>
+<h2>Rotor Dic<a class="headerlink" href="#rotor-dic" title="Permalink to this headline">¶</a></h2>
+<p>sadasdasdasd:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rotor_choices</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">1</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;wiring&#39;</span><span class="p">:</span> <span class="s1">&#39;EKMFLGDQVZNTOWYHXUSPAIBRCJ&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;step&#39;</span><span class="p">:</span> <span class="s1">&#39;Q&#39;</span>
+    <span class="p">},</span>
+    <span class="mi">2</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;wiring&#39;</span><span class="p">:</span> <span class="s1">&#39;AJDKSIRUXBLHWTMCQGZNPYFVOE&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;step&#39;</span><span class="p">:</span> <span class="s1">&#39;E&#39;</span>
+    <span class="p">},</span>
+    <span class="mi">3</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;wiring&#39;</span><span class="p">:</span> <span class="s1">&#39;BDFHJLCPRTXVZNYEIWGAKMUSQO&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;step&#39;</span><span class="p">:</span> <span class="s1">&#39;V&#39;</span>
+    <span class="p">},</span>
+    <span class="mi">4</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;wiring&#39;</span><span class="p">:</span> <span class="s1">&#39;ESOVPZJAYQUIRHXLNFTGKDCMWB&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;step&#39;</span><span class="p">:</span> <span class="s1">&#39;J&#39;</span>
+    <span class="p">},</span>
+    <span class="mi">5</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;wiring&#39;</span><span class="p">:</span> <span class="s1">&#39;VZBRGITYUPSDNHLXAWMJQOFECK&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;step&#39;</span><span class="p">:</span> <span class="s1">&#39;Z&#39;</span>
+    <span class="p">},</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="reflector-dict">
-<h3>Reflector Dict<a class="headerlink" href="#reflector-dict" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="s2">&quot;reflector_b&quot;</span><span class="o">:</span> <span class="s2">&quot;YRUHQSLDPXNGOKMIEBFZCWVJAT&quot;</span><span class="p">,</span>
-<span class="s2">&quot;reflector_c&quot;</span><span class="o">:</span> <span class="s2">&quot;FVPJIAOYEDRZXWGCTKUQSBNMHL&quot;</span>
-</pre></div>
-</div>
-</div>
+<h2>Reflector Dict<a class="headerlink" href="#reflector-dict" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>..code-block:: python</dt>
+<dd><dl class="first last docutils">
+<dt>These are the entries::</dt>
+<dd><dl class="first docutils">
+<dt>{</dt>
+<dd>‘reflector_b’: ‘YRUHQSLDPXNGOKMIEBFZCWVJAT’,  # b reflector
+‘reflector_c’: ‘FVPJIAOYEDRZXWGCTKUQSBNMHL’  # c reflector</dd>
+</dl>
+<p class="last">}</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </div>
 </div>
 
@@ -458,7 +466,7 @@ The Middle Rotor does  contain the double step flaw.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="examples.html" class="btn btn-neutral float-right" title="Example" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="modules.html" class="btn btn-neutral float-right" title="clean" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="Jefferson.html" class="btn btn-neutral" title="Jefferson module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

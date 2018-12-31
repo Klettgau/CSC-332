@@ -1,5 +1,6 @@
 Engima module
 =============
+*******************
 ``M3 Enigma`` class
 *******************
 .. automodule:: ciphers.Engima
@@ -11,19 +12,36 @@ Engima module
 *********
 Rotor Dic
 *********
-.. exec::
-    import json
-    from ciphers.Engima import M3
-    json_obj = json.dumps(M3.rotor_choices, sort_keys=True, indent=4)
-    json_obj= json_obj[:-1]+""
-    print('.. code-block:: JavaScript\n\n    %s\n\n' % json_obj)   
-
-*********    
+sadasdasdasd::
+    
+    rotor_choices = {
+        1: {
+            'wiring': 'EKMFLGDQVZNTOWYHXUSPAIBRCJ',
+            'step': 'Q'
+        },
+        2: {
+            'wiring': 'AJDKSIRUXBLHWTMCQGZNPYFVOE',
+            'step': 'E'
+        },
+        3: {
+            'wiring': 'BDFHJLCPRTXVZNYEIWGAKMUSQO',
+            'step': 'V'
+        },
+        4: {
+            'wiring': 'ESOVPZJAYQUIRHXLNFTGKDCMWB',
+            'step': 'J'
+        },
+        5: {
+            'wiring': 'VZBRGITYUPSDNHLXAWMJQOFECK',
+            'step': 'Z'
+        },
+    }  
+**************    
 Reflector Dict
-*********
-.. exec::
-    import json
-    from ciphers.Engima import M3    
-    reflector = json.dumps(M3.reflector, sort_keys=True, indent=4)
-    reflector= reflector[:-1]+""
-    print('.. code-block:: JavaScript\n\n    %s\n\n' % reflector)
+**************
+..code-block:: python
+    These are the entries::
+        {
+            'reflector_b': 'YRUHQSLDPXNGOKMIEBFZCWVJAT',  # b reflector
+            'reflector_c': 'FVPJIAOYEDRZXWGCTKUQSBNMHL'  # c reflector
+        }
