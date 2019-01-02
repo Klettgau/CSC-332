@@ -316,7 +316,6 @@ class M3(Resource):
             'wiring': 'VZBRGITYUPSDNHLXAWMJQOFECK',
             'step': 'Z'
         },
-
     }
     reflector = {
         'reflector_b': 'YRUHQSLDPXNGOKMIEBFZCWVJAT',  # b reflector

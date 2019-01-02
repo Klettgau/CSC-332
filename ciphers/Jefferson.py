@@ -1,90 +1,74 @@
 ## so you always start at line 1 but the key is the amount you go to the right
 # be able to pick the line to start with
 from flask_restful import Resource
+from flask import jsonify
 from ciphers.CustomParser import Parsely
+import random
 
 
 class Jefferson(Resource):
     def get(self):
+        """
+        This is the method that handles GET Requests for Jefferson wheel Cipher
+        Args:
+            None since a Custom Parser Object is imported from CustomParser
+        Return:
+            The output of the encode and decode functions.
+        """
         parser = Parsely.parser_jeff(Parsely)
         args = parser.parse_args()
         if args.mode is 0:
-            if args.wheel_order is None:
-                return self.encode(args.message, args.privateKey, self.not_random())
-
-            return self.encode(args.message, args.privateKey, self.wheel_order)
+            print(args.wheel_order,"ads")
+            if not args.wheel_order:
+                return self.encode(args.message, args.privateKey,random.sample(range(0,25),25))
+            else:
+                if self.check_wheel_parameters(args.wheel_order):
+                    return self.encode(args.message, args.privateKey, args.wheel_order)
+                return {"error":"the provided wheel order was not valid"}
         else:
-            return self.decode(args.message, args.privateKey, self.wheel_order)
-
-    def encode(self, userInput, shift, wheel_order):
+            if self.check_wheel_parameters(args.wheel_order):
+                return self.decode(args.message, args.privateKey, args.wheel_order)
+            return {"error":"the provided wheel order was not valid"}
+    def encode(self, user_input, shift, wheel_order):
         """
-        This is a test for jeff
+        This performs the encoding/decoding of the cipher text.
 
         Args:
-            userInput:String
-            shift:the starting wheel
-
+            user_input: The message provided to the cipher.
+            shift:the line which to read from.
+            wheel_order: the order of the 25 wheels.
         Returns:
+            The encoded/decoded message,wheel order and line in json format.
         """
         cipher = []
+        #wheel_order = wheel_order.split(",")
         shift %= 26
-        userInput = userInput.upper()
+        user_input = user_input.upper()
 
         # the negative equivalent decrpyts its so encrupt l--R and decrypt R--L
-        for x in range(len(userInput)):
-            x%=25
-            # wheel = alphabet[x]  # iterate over all the wheels
-            print(wheel_order)
-            try:
-                perm = alphabet[wheel_order[x]]
-                print("shift",shift,perm,x)
-            except IndexError:
-                print(type(x),"x value--------------------------------------------",x)
-            # 65-90 Capital otherwise just return the value
-            if ord(userInput[x]) <= 64:
-                cipher.append(userInput[x])
-            elif ord(userInput[x]) > 90:
-                cipher.append(userInput[x])
+        for x in range(len(user_input)):
+            x %= 25
+            perm = alphabet[int(wheel_order[x])]
+
+            if ord(user_input[x]) <= 64 or ord(user_input[x]) > 90:
+                cipher.append(user_input[x])
             else:
-                #print("the encoded char:",perm[(perm.index(userInput[x]) + shift)%26])
-                cipher.append(perm[(perm.index(userInput[x]) + shift)%25])
-                # cipher.append(wheel[(wheel.index(userInput[x]) + shift) % 26])  ##26 is the len of the wheel
-        return {''.join(cipher): wheel_order}
+                cipher.append(perm[(perm.index(user_input[x]) + shift) % 26])
+        return jsonify({''.join(cipher): wheel_order})
 
-    def decode(self, encodeInput, shiftFactor, wheel_order):
-        # colors may not work for all platforms
-        return self.encode(encodeInput, -shiftFactor, wheel_order)
+    def decode(self, encode_input, shiftFactor, wheel_order):
+        return self.encode(encode_input, -shiftFactor, wheel_order)
 
-    def check_parameters(self,wheel_order):
+    def check_wheel_parameters(self, wheel_order):
         # we check that the rotor order is unique and a set of 25
         res = set(wheel_order.split(","))
+        for x in res:
+            if x.isalpha():
+                return False
         if len(res) is not 25:
             return False
         return True
 
-   # def check_digit(self,wheel_order):
-   #     return(wheel_order..isdigit())
-
-
-    def not_random(self):
-        import random
-        from time import process_time
-
-        # print(time.localtime())
-        setty = list()
-        res = list()
-        for x in range(25):
-            setty.append(x)
-        for y in range(25):
-            tmp = random.randint(0, 25)
-            x = False
-            while (not x):
-                if setty.__contains__(tmp):
-                    res.append(setty.pop(setty.index(tmp)))
-                    x = True
-
-                tmp = random.randint(0, 25)
-        return res
 
 
 alphabet = ["ABCEIGDJFVUYMHTQKZOLRXSPWN", "ACDEHFIJKTLMOUVYGZNPQXRWSB", "ADKOMJUBGEPHSCZINXFYQRTVWL",

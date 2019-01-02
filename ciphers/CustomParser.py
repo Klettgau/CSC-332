@@ -30,7 +30,7 @@ class Parsely:
         parser = reqparse.RequestParser(bundle_errors=True)
         parser.add_argument("message", type=str, required=True, help="the message")
         parser.add_argument("privateKey", required=True, type=int)
-        parser.add_argument("wheel_order")
+        parser.add_argument("wheel_order",required=True)
         parser.add_argument("mode",required=True,help="0 for encode and 1 for decode",type=int)
         return parser
 
