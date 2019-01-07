@@ -14,6 +14,12 @@ class Vig(Resource):
 
 
     def print_tabula(self):
+        """
+        Print out a reference tabula recta.
+
+        Returns:
+             A Tabula Recta in String format.
+        """
         recta = []
         for i in range(0, 26):
             line = ''
@@ -23,14 +29,25 @@ class Vig(Resource):
         return recta
 
     def encode(self,plainext, keyword):
-        #  key(row) column(plaintext)
+        """
+        Encode the message using the supplied values.
+        The key dictates the row to use and the plaintext dictates the column.
+        Args:
+            plainext:The message to be encoded.
+            keyword: The private key to be used for the message.
+        Returns:
+            The encoded message using the provided values.
+        """
+
         cipher_text = []
         for c in range(len(plainext)):
             cipher_text.append(chr((((ord(plainext[c]) - 65) + (ord(keyword[c % len(keyword)]) - 65)) % 26) + 65))
         return cipher_text
 
     def decode(self,cipher, keyword):
-        tabula = self.print_tabula()  # list of lists that are the tabula
+        """
+        Same as Encoding but subtract the key from the cipher text.
+        """
         plain = []
         for c in range(len(cipher)):
             plain.append(chr((((ord(cipher[c]) - 65) - (ord(keyword[c % len(keyword)]) - 65)) % 26) + 65))

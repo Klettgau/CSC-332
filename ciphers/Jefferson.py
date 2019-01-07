@@ -1,10 +1,8 @@
-## so you always start at line 1 but the key is the amount you go to the right
-# be able to pick the line to start with
+
 from flask_restful import Resource
 from flask import jsonify
 from ciphers.CustomParser import Parsely
 import random
-
 
 class Jefferson(Resource):
     def get(self):
@@ -13,7 +11,7 @@ class Jefferson(Resource):
         Args:
             None since a Custom Parser Object is imported from CustomParser
         Return:
-            The output of the encode and decode functions.
+            The output of the encode/decode functions.
         """
         parser = Parsely.parser_jeff(Parsely)
         args = parser.parse_args()
@@ -31,21 +29,21 @@ class Jefferson(Resource):
             return {"error":"the provided wheel order was not valid"}
     def encode(self, user_input, shift, wheel_order):
         """
-        This performs the encoding/decoding of the cipher text.
+        This performs the encoding of the cipher text.The shift factor is positive
+        to encode the message.
 
         Args:
             user_input: The message provided to the cipher.
             shift:the line which to read from.
             wheel_order: the order of the 25 wheels.
         Returns:
-            The encoded/decoded message,wheel order and line in json format.
+            The encoded message,shift value and wheel order  in json format.
         """
         cipher = []
-        #wheel_order = wheel_order.split(",")
+        wheel_order = wheel_order.split(",")
         shift %= 26
         user_input = user_input.upper()
 
-        # the negative equivalent decrpyts its so encrupt l--R and decrypt R--L
         for x in range(len(user_input)):
             x %= 25
             perm = alphabet[int(wheel_order[x])]
@@ -54,13 +52,33 @@ class Jefferson(Resource):
                 cipher.append(user_input[x])
             else:
                 cipher.append(perm[(perm.index(user_input[x]) + shift) % 26])
-        return jsonify({''.join(cipher): wheel_order})
+        return jsonify({"message":''.join(cipher),
+                        "wheel_order":self.stringify_wheel(wheel_order),
+                        "shift":shift})
 
     def decode(self, encode_input, shiftFactor, wheel_order):
+        """
+        This performs the decoding of the message.The shiftfactor is negative
+        for decoding.
+
+        Args:
+            user_input: The message provided to the cipher.
+            shiftFactor: The line which to read the message
+            wheel_order: the order of the 25 wheels.
+        Returns:
+            The decoded message and the wheel order used in json format.
+        """
         return self.encode(encode_input, -shiftFactor, wheel_order)
 
     def check_wheel_parameters(self, wheel_order):
-        # we check that the rotor order is unique and a set of 25
+        """
+        This is to ensure that user provided wheel order is meets the criteria.
+        The wheel order must be values [0-24],no repeats and comma seperated.
+        Args:
+            wheel_order:
+        Returns:
+            True if the wheel order is valid otherwise False.
+        """
         res = set(wheel_order.split(","))
         for x in res:
             if x.isalpha():
@@ -69,6 +87,19 @@ class Jefferson(Resource):
             return False
         return True
 
+    def stringify_wheel(self,wheel_order):
+        """
+        To provide the user a copy and paste method to share wheel orders
+        Args:
+            wheel_order: The order of the provided wheels.
+        Returns:
+             The wheel order in a comma seperated string
+        """
+        result = []
+        for i in range(len(wheel_order)-1):
+            result.append(str(wheel_order[i])+',')
+        result.append(str(wheel_order[len(wheel_order)-1]))
+        return ''.join(result)
 
 
 alphabet = ["ABCEIGDJFVUYMHTQKZOLRXSPWN", "ACDEHFIJKTLMOUVYGZNPQXRWSB", "ADKOMJUBGEPHSCZINXFYQRTVWL",

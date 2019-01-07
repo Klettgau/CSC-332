@@ -1,5 +1,6 @@
 import ciphers.CustomParser as Parser
 from flask import request
+
 """
 Enigma.py
 ====================================
@@ -7,7 +8,6 @@ Basic implementation of the M3 Enigma.
 """
 from flask_restful import Resource
 from flask import jsonify
-
 
 
 class M3(Resource):
@@ -52,38 +52,34 @@ class M3(Resource):
         Returns:
             The message decoded/encoded.
         """
-        print(request.path)
+
+        message = self.set_up()
+        return jsonify({'message': (''.join(self.run_machine(message)))})
+
+    def set_up(self):
+        # this will set up
         custom_parser = Parser.Parsely.Enigma(Parser.Parsely)
-        custom_parser=custom_parser.parse_args()
-        output = []
+        custom_parser = custom_parser.parse_args()
         self.create_stecker_board(custom_parser.stecker_pair)
-        print(self.stecker_board)
         self.set_rotors(custom_parser.rotor_order[0], custom_parser.rotor_order[1], custom_parser.rotor_order[2])
         self.set_rotors_intial_position(custom_parser.start_position)
         self.set_ring_setting(custom_parser.ring_setting)
-        processed_input = custom_parser.message.upper().strip()
+        return custom_parser.message.upper().strip()
 
-        for z in processed_input:
-            if ord(z) >= 65 or ord(z) > +90:
+    def run_machine(self, message):
+        output = []
+        for z in message:
+            if ord(z) >= 65 and ord(z) <= 90:
                 self.step_rotors()
-                #print("fast", self.fast_counter, "med", self.medium_counter, "slowest", self.slow_counter)
                 z = self.stecker_board_output(z)
-                #print('z:', z)
                 forward_encode = self.forward(z)
-                #print(forward_encode)
                 lamp_outout = self.reflector_result(forward_encode)
                 reverse_encode = self.reverse(lamp_outout)
-                #print(reverse_encode, "resafd")
                 steckerboard_final = self.stecker_board_output(chr(reverse_encode + 65))
                 output.append(steckerboard_final)
-
             else:
                 output.append(z)
-        print(
-            "fast", self.fast_counter, "med", self.medium_counter, "slowest", self.slow_counter, 'output',
-            ''.join(output))
-        return jsonify({'message':(''.join(output))})
-
+        return output
 
     def step_rotors(self):
         """
@@ -147,12 +143,13 @@ class M3(Resource):
         self.medium_counter = ord(user_input[1]) - 65
         self.slow_counter = ord(user_input[0]) - 65
 
-    def check_valid_char(self,suspected_char):
+    def check_valid_char(self, suspected_char):
         #  check if the char is a valid uppercase ASCII.
         if ord(suspected_char) < 65 or ord(suspected_char) > 90:
             return False
         else:
             return True
+
     # if this returns false, the system assumes everything is self-steckered
     def check_stecker_restrictions(self, stecker_pair):
         no_spaces = stecker_pair.replace(" ", "")
@@ -236,27 +233,23 @@ class M3(Resource):
         Returns:
             The char encoded/decoded is returned.
         """
-        count = 0
-        ring = 0  # ground setting/ring settin
-        for x in input:
-            x = (ord(x) - 65) % 26
-            for y in range(3, 0, -1):
-                if y is 3:
-                    ring = self.right_rotor_ring
-                    count = self.fast_counter
-                elif y is 2:
-                    ring = self.middle_rotor_ring
-                    count = self.medium_counter
-                else:
-                    ring = self.left_rotor_ring
-                    count = self.slow_counter
-                trans = (((x - ring) % 26) + count) % 26
-                encoded = self.rotor_choices[y]['wiring'][trans]
-                xx = (((ord(encoded) - 65) % 26) - count) % 26
-                beforeRing = (xx + ring) % 26
-                print(chr(beforeRing + 65), "----answer from wheel")
-                x = beforeRing
-        return x
+        current_char = (ord(input) - 65) % 26
+        for y in range(3, 0, -1):
+            if y is 3:
+                ring = self.right_rotor_ring
+                count = self.fast_counter
+            elif y is 2:
+                ring = self.middle_rotor_ring
+                count = self.medium_counter
+            else:
+                ring = self.left_rotor_ring
+                count = self.slow_counter
+            trans = (((current_char - ring) % 26) + count) % 26
+            encoded = self.rotor_choices[y]['wiring'][trans]
+            xx = (((ord(encoded) - 65) % 26) - count) % 26
+            before_ring = (xx + ring) % 26
+            current_char = before_ring
+        return current_char
 
     def reverse(self, input):
         """
@@ -268,56 +261,51 @@ class M3(Resource):
         Returns:
             The char encoded/decoded is returned.
         """
-        bet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        count = 0
-        ring = 0
-        for x in input:
-            x = (ord(x) - 65) % 26
-            for y in range(1, 4):
-                if y is 3:
-                    ring = self.right_rotor_ring
-                    count = self.fast_counter
-                elif y is 2:
-                    ring = self.middle_rotor_ring
-                    count = self.medium_counter
-                else:
-                    ring = self.left_rotor_ring
-                    count = self.slow_counter
-                trans = (((x - ring) % 26) + count) % 26
-                encoded = self.rotor_choices[y]['wiring'].index(bet[trans])
-                xx = (encoded - count) % 26
-                beforeRing = (xx + ring) % 26
-                if y is 3:
-                    beforeRing = (beforeRing) % 26
-                x = beforeRing
-        return x
+        alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        current_char = (ord(input) - 65) % 26
+        for y in range(1, 4):
+            if y is 3:
+                ring = self.right_rotor_ring
+                count = self.fast_counter
+            elif y is 2:
+                ring = self.middle_rotor_ring
+                count = self.medium_counter
+            else:
+                ring = self.left_rotor_ring
+                count = self.slow_counter
+            trans = (((current_char - ring) % 26) + count) % 26
+            encoded = self.rotor_choices[y]['wiring'].index(alphabet[trans])
+            xx = (encoded - count) % 26
+            beforeRing = (xx + ring) % 26
+            if y is 3:
+                beforeRing = (beforeRing) % 26
+            current_char = beforeRing
+        return current_char
 
 
-
-    #: this will become it's own class.
-    rotor_choices = {
-        1: {
-            'wiring': 'EKMFLGDQVZNTOWYHXUSPAIBRCJ',
-            'step': 'Q'
-        },
-        2: {
-            'wiring': 'AJDKSIRUXBLHWTMCQGZNPYFVOE',
-            'step': 'E'
-        },
-        3: {
-            'wiring': 'BDFHJLCPRTXVZNYEIWGAKMUSQO',
-            'step': 'V'
-        },
-        4: {
-            'wiring': 'ESOVPZJAYQUIRHXLNFTGKDCMWB',
-            'step': 'J'
-        },
-        5: {
-            'wiring': 'VZBRGITYUPSDNHLXAWMJQOFECK',
-            'step': 'Z'
-        },
-    }
-    reflector = {
-        'reflector_b': 'YRUHQSLDPXNGOKMIEBFZCWVJAT',  # b reflector
-        'reflector_c': 'FVPJIAOYEDRZXWGCTKUQSBNMHL'  # c reflector
-    }
+rotor_choices = {
+    1: {
+        'wiring': 'EKMFLGDQVZNTOWYHXUSPAIBRCJ',
+        'step': 'Q'
+    },
+    2: {
+        'wiring': 'AJDKSIRUXBLHWTMCQGZNPYFVOE',
+        'step': 'E'
+    },
+    3: {
+        'wiring': 'BDFHJLCPRTXVZNYEIWGAKMUSQO',
+        'step': 'V'
+    },
+    4: {
+        'wiring': 'ESOVPZJAYQUIRHXLNFTGKDCMWB',
+        'step': 'J'
+    },
+    5: {
+        'wiring': 'VZBRGITYUPSDNHLXAWMJQOFECK',
+        'step': 'Z'
+    },
+}
+reflector = {
+    'reflector_b': 'YRUHQSLDPXNGOKMIEBFZCWVJAT',  # b reflector
+    'reflector_c': 'FVPJIAOYEDRZXWGCTKUQSBNMHL'  # c reflector
+}

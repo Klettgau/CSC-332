@@ -4,6 +4,9 @@ from flask_restful import reqparse
 
 
 class Parsely:
+    """
+    A Parser to handle each of the different Cipher's url arguments.
+    """
     def parser_jules(self):
         parser = reqparse.RequestParser(bundle_errors=True)
         parser.add_argument("message", type=str, required=True, help="the message")
