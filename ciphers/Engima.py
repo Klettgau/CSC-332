@@ -1,11 +1,8 @@
 import ciphers.CustomParser as Parser
+import string
 from flask import request
 
-"""
-Enigma.py
-====================================
-Basic implementation of the M3 Enigma.
-"""
+
 from flask_restful import Resource
 from flask import jsonify
 
@@ -32,9 +29,9 @@ class M3(Resource):
     """
 
     def __init__(self):
-        self.fast_rotor = self.rotor_choices[3]
-        self.medium_rotor = self.rotor_choices[2]
-        self.slow_rotor = self.rotor_choices[1]
+        self.fast_rotor = rotor_choices[3]
+        self.medium_rotor = rotor_choices[2]
+        self.slow_rotor = rotor_choices[1]
         self.reflector = self.reflector['reflector_b']
         self.stecker_board = set()
         self.max_pairs = 10
@@ -57,7 +54,12 @@ class M3(Resource):
         return jsonify({'message': (''.join(self.run_machine(message)))})
 
     def set_up(self):
-        # this will set up
+        """
+        Set up the machine according to user provided values.
+
+        Returns:
+             The user provided message.
+        """
         custom_parser = Parser.Parsely.Enigma(Parser.Parsely)
         custom_parser = custom_parser.parse_args()
         self.create_stecker_board(custom_parser.stecker_pair)
@@ -67,6 +69,14 @@ class M3(Resource):
         return custom_parser.message.upper().strip()
 
     def run_machine(self, message):
+        """
+        Runs through each character and encodes/decodes it.
+        Args:
+            message:The user provided message.
+
+        Returns:
+             The outout of encoding/decoding the message.
+        """
         output = []
         for z in message:
             if ord(z) >= 65 and ord(z) <= 90:
@@ -124,9 +134,9 @@ class M3(Resource):
             ValueError: The passed in rotor string is not a valid integer
 
         """
-        self.fast_rotor = self.rotor_choices[int(fast)]
-        self.medium_rotor = self.rotor_choices[int(medium)]
-        self.slow_rotor = self.rotor_choices[int(slow)]
+        self.fast_rotor = rotor_choices[int(fast)]
+        self.medium_rotor = rotor_choices[int(medium)]
+        self.slow_rotor = rotor_choices[int(slow)]
 
     def set_rotors_intial_position(self, user_input):
         """
@@ -144,7 +154,7 @@ class M3(Resource):
         self.slow_counter = ord(user_input[0]) - 65
 
     def check_valid_char(self, suspected_char):
-        #  check if the char is a valid uppercase ASCII.
+
         if ord(suspected_char) < 65 or ord(suspected_char) > 90:
             return False
         else:
@@ -152,6 +162,15 @@ class M3(Resource):
 
     # if this returns false, the system assumes everything is self-steckered
     def check_stecker_restrictions(self, stecker_pair):
+        """
+        Checks if user provided stecker board pairs is valid.
+
+        Args:
+            stecker_pair: String that represent the stecker board pairs.
+
+        Returns:
+            True or False if the user provided values are valid.
+        """
         no_spaces = stecker_pair.replace(" ", "")
         split_pair = stecker_pair.split()
         unique_chars = set(no_spaces)
@@ -261,7 +280,7 @@ class M3(Resource):
         Returns:
             The char encoded/decoded is returned.
         """
-        alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
         current_char = (ord(input) - 65) % 26
         for y in range(1, 4):
             if y is 3:
@@ -274,7 +293,7 @@ class M3(Resource):
                 ring = self.left_rotor_ring
                 count = self.slow_counter
             trans = (((current_char - ring) % 26) + count) % 26
-            encoded = self.rotor_choices[y]['wiring'].index(alphabet[trans])
+            encoded = self.rotor_choices[y]['wiring'].index(string.ascii_uppercase[trans])
             xx = (encoded - count) % 26
             beforeRing = (xx + ring) % 26
             if y is 3:
