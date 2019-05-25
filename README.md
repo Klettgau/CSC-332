@@ -13,12 +13,13 @@ pip install requirements.txt
 ## Deployment
 The package will run a flask server locally that will accept requests and the necessary parameters will be passed as url parameters. 
 ```
+python main.py
 ```
 
 ## Built With
 
-* [FLASK](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [FLASK-RESTFUL](https://maven.apache.org/) - Dependency Management
+* [FLASK](https://pypi.org/project/Flask/) - Web Framework used
+* [FLASK-RESTFUL](https://flask-restful.readthedocs.io/en/latest/) - RESTFul Framework
 
 
 ## Authors
