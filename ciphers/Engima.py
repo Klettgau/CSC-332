@@ -1,10 +1,8 @@
-import ciphers.CustomParser as Parser
 import string
-from flask import request
-
-
-from flask_restful import Resource
 from flask import jsonify
+from flask_restful import Resource
+
+import ciphers.CustomParser as Parser
 
 
 class M3(Resource):
@@ -32,7 +30,7 @@ class M3(Resource):
         self.fast_rotor = rotor_choices[3]
         self.medium_rotor = rotor_choices[2]
         self.slow_rotor = rotor_choices[1]
-        self.reflector = self.reflector['reflector_b']
+        self.reflector = reflectorz['reflector_b']
         self.stecker_board = set()
         self.max_pairs = 10
         self.fast_counter = 25
@@ -197,6 +195,7 @@ class M3(Resource):
         if not wire_pairing:
             return
         string_pairs = wire_pairing.upper().split()  # list of the combos
+        print(string_pairs)
         pairs = set()  # this will allow us to avoid checking repeats
         if self.check_stecker_restrictions(wire_pairing) is True:
             for combo in string_pairs:
@@ -208,7 +207,9 @@ class M3(Resource):
                 else:
                     return False  # raise an exception here so the api returns the error
             self.stecker_board = pairs
-        print("failed")
+            print(self.stecker_board)
+        else:
+            print("failed")
 
     def stecker_board_output(self, char_to_be_stecker):
         """
@@ -222,8 +223,10 @@ class M3(Resource):
         """
         stecker = self.stecker_board
         if not stecker:
+            print("stecker 1")
             return char_to_be_stecker
         for pair in stecker:
+            print(pair)
             if char_to_be_stecker in pair:
                 a, b = pair
                 if char_to_be_stecker != a:
@@ -231,7 +234,8 @@ class M3(Resource):
                 else:
                     return b
             else:
-                return char_to_be_stecker
+                print("stecker 2")
+        return char_to_be_stecker
 
     def reflector_result(self, char):
         return self.reflector[char]
@@ -264,7 +268,7 @@ class M3(Resource):
                 ring = self.left_rotor_ring
                 count = self.slow_counter
             trans = (((current_char - ring) % 26) + count) % 26
-            encoded = self.rotor_choices[y]['wiring'][trans]
+            encoded = rotor_choices[y]['wiring'][trans]
             xx = (((ord(encoded) - 65) % 26) - count) % 26
             before_ring = (xx + ring) % 26
             current_char = before_ring
@@ -293,7 +297,7 @@ class M3(Resource):
                 ring = self.left_rotor_ring
                 count = self.slow_counter
             trans = (((current_char - ring) % 26) + count) % 26
-            encoded = self.rotor_choices[y]['wiring'].index(string.ascii_uppercase[trans])
+            encoded = rotor_choices[y]['wiring'].index(string.ascii_uppercase[trans])
             xx = (encoded - count) % 26
             beforeRing = (xx + ring) % 26
             if y is 3:
@@ -324,7 +328,7 @@ rotor_choices = {
         'step': 'Z'
     },
 }
-reflector = {
+reflectorz = {
     'reflector_b': 'YRUHQSLDPXNGOKMIEBFZCWVJAT',  # b reflector
     'reflector_c': 'FVPJIAOYEDRZXWGCTKUQSBNMHL'  # c reflector
 }
