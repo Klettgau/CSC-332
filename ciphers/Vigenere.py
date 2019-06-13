@@ -1,9 +1,12 @@
 from flask_restful import Resource
+
 from ciphers.CustomParser import Parsely
+
 
 class Vig(Resource):
     def get(self):
-        parser=Parsely.parser_vig(Parsely)
+        parser= Parsely()
+        parser=parser.parser_vig()
         args = parser.parse_args()
         if args.mode is 0:
             return self.encode(args.message,args.privateKey)

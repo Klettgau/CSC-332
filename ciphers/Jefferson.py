@@ -1,8 +1,11 @@
 
-from flask_restful import Resource
-from flask import jsonify
-from ciphers.CustomParser import Parsely
 import random
+
+from flask import jsonify
+from flask_restful import Resource
+
+from ciphers.CustomParser import Parsely
+
 
 class Jefferson(Resource):
     def get(self):
@@ -13,10 +16,10 @@ class Jefferson(Resource):
         Return:
             The output of the encode/decode functions.
         """
-        parser = Parsely.parser_jeff(Parsely)
+        parser = Parsely()
+        parser = parser.parser_jeff()
         args = parser.parse_args()
         if args.mode is 0:
-            print(args.wheel_order,"ads")
             if not args.wheel_order:
                 return self.encode(args.message, args.privateKey,random.sample(range(0,25),25))
             else:

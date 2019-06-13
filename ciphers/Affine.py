@@ -1,10 +1,13 @@
-from flask_restful import Resource,abort
+from flask_restful import Resource, abort
+
 from ciphers.CustomParser import Parsely
-# y = mx+b
+
+
 class Affine(Resource):
     """
-    A Simple Affine Cipher.
+    A Simple Affine Cipher. y = mx+b
     """
+
     def get(self):
         """
 
@@ -12,15 +15,16 @@ class Affine(Resource):
         Return:
              The Encoded/Decoded User's message in json format.
         """
-        parser=Parsely.parser_affine(Parsely)
+        parser = Parsely()
+        parser = Parsely.parser_affine()
         args = parser.parse_args()
-        inverse= self.checkCoPrime(args.privateKey,26)
+        inverse = self.check_coprime(args.privateKey, 26)
         print(inverse)
         if args.mode is 0:
-            return self.encode(args.message,args.privateKey,args.intercept)
-        return self.decode(args.message,inverse,args.intercept)
+            return self.encode(args.message, args.privateKey, args.intercept)
+        return self.decode(args.message, inverse, args.intercept)
 
-    def encode(self,user_input, m, b):
+    def encode(self, user_input, m, b):
         """
         Encode the selected character based off the intercept and coefficient.
         Attributes:
@@ -36,15 +40,14 @@ class Affine(Resource):
         for i in range(len(user_input)):
             current_char = user_input[i]
             if 65 <= ord(current_char) <= 90:
-                encoded_input.append(chr((((ord(current_char) - 65) * m) + b) % 26+65))
+                encoded_input.append(chr((((ord(current_char) - 65) * m) + b) % 26 + 65))
             else:
                 encoded_input.append(ord(current_char))  ##any other ascii values
 
         return encoded_input  # list of alphabet values except for spaces etc
 
-
     # A*x +m
-    def decode(self,encoded, inverse, b):
+    def decode(self, encoded, inverse, b):
         """
         Decode the selected character based off the intercept and coefficient.
         unencoded = inverse *(encoded -m)yt
@@ -59,7 +62,7 @@ class Affine(Resource):
         """
         decoded = []
         for x in encoded:
-            x = ord(x)-65
+            x = ord(x) - 65
             if 0 <= x <= 26:
                 zz = ((((inverse * (x - b)) % 26) + 65))
                 decoded.append(chr((((inverse * (x - b)) % 26) + 65)))
@@ -69,8 +72,7 @@ class Affine(Resource):
 
         return decoded  # list of ascii values
 
-
-    def egcd(self,a, b):
+    def egcd(self, a, b):
         """
         Extended Euclidean algorithm
         Attributes:
@@ -86,8 +88,7 @@ class Affine(Resource):
             g, y, x = self.egcd(b % a, a)
             return g, x - (b // a) * y, y
 
-
-    def modinv(self,a, m):
+    def modinv(self, a, m):
         """
         https://stackoverflow.com/questions/4798654/modular-multiplicative-inverse-function-in-python
         This is to find the multiplicative inverse in order to check if the user provided value is coprime.
@@ -105,9 +106,7 @@ class Affine(Resource):
         else:
             return x % m
 
-
-
-    def checkCoPrime(self,proposed_value, modolus):
+    def check_coprime(self, proposed_value, modolus):
         """
         Could just have a list of values but check if the user provided value
         is coprime with 26.
@@ -127,5 +126,5 @@ class Affine(Resource):
                 if res is not None:
                     coPrimeList.append(res)
             coPrimeList.sort()
-            abort(400,message="Below are the coprime values with 26. Please use one",coprimeValues=coPrimeList)
+            abort(400, message="Below are the coprime values with 26. Please use one", coprimeValues=coPrimeList)
         return possible_value

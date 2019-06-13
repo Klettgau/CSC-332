@@ -1,4 +1,5 @@
 import string
+
 from flask import jsonify
 from flask_restful import Resource
 
@@ -58,7 +59,8 @@ class M3(Resource):
         Returns:
              The user provided message.
         """
-        custom_parser = Parser.Parsely.Enigma(Parser.Parsely)
+        custom_parser = Parser.Parsely()
+        custom_parser = custom_parser.parser_enigma()
         custom_parser = custom_parser.parse_args()
         self.create_stecker_board(custom_parser.stecker_pair)
         self.set_rotors(custom_parser.rotor_order[0], custom_parser.rotor_order[1], custom_parser.rotor_order[2])
@@ -246,17 +248,17 @@ class M3(Resource):
         self.middle_rotor_ring = ord(user_input[1]) - 65
         self.left_rotor_ring = ord(user_input[0]) - 65
 
-    def forward(self, input):
+    def forward(self, user_input):
         """
         The character is passed through the machine right to left.
 
         Args:
-            input: The message to be passed through the machine.
+            user_input: The message to be passed through the machine.
 
         Returns:
             The char encoded/decoded is returned.
         """
-        current_char = (ord(input) - 65) % 26
+        current_char = (ord(user_input) - 65) % 26
         for y in range(3, 0, -1):
             if y is 3:
                 ring = self.right_rotor_ring
@@ -274,18 +276,18 @@ class M3(Resource):
             current_char = before_ring
         return current_char
 
-    def reverse(self, input):
+    def reverse(self, user_input):
         """
         The character is passed through the machine left to right.
 
         Args:
-            input: The message to be passed through the machine.
+            user_input: The message to be passed through the machine.
 
         Returns:
             The char encoded/decoded is returned.
         """
 
-        current_char = (ord(input) - 65) % 26
+        current_char = (ord(user_input) - 65) % 26
         for y in range(1, 4):
             if y is 3:
                 ring = self.right_rotor_ring
@@ -299,10 +301,10 @@ class M3(Resource):
             trans = (((current_char - ring) % 26) + count) % 26
             encoded = rotor_choices[y]['wiring'].index(string.ascii_uppercase[trans])
             xx = (encoded - count) % 26
-            beforeRing = (xx + ring) % 26
+            before_ring = (xx + ring) % 26
             if y is 3:
-                beforeRing = (beforeRing) % 26
-            current_char = beforeRing
+                before_ring = before_ring % 26
+            current_char = before_ring
         return current_char
 
 

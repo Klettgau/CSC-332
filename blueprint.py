@@ -5,6 +5,7 @@ from ciphers.Vigenere import Vig
 from ciphers.Affine import Affine
 from ciphers.Julius import Julius
 from ciphers.Jefferson import Jefferson
+from ciphers.Hill import  Hill
 
 engima_blue = Blueprint('enigma',__name__)
 vig_blue = Blueprint('vigenere',__name__)
@@ -18,3 +19,4 @@ api.add_resource(Vig,'/Vigenere')
 api.add_resource(Affine,'/Affine')
 api.add_resource(Julius,'/Julius')
 api.add_resource(Jefferson,'/Jefferson')
+api.add_resource(Hill, '/Hill')
