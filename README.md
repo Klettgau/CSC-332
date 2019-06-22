@@ -1,5 +1,4 @@
-# Klettgau's Ciphers
-
+# Klettgau's Ciphers [![Documentation Status](https://readthedocs.org/projects/klettgaus-basic-cipher/badge/?version=latest)](https://klettgaus-basic-cipher.readthedocs.io/en/latest/?badge=latest)
 A collection of Symmetric ciphers implemented as a primitive api utilizing Flask to supplement a cryptography course.
 
 ## Getting Started
@@ -15,7 +14,10 @@ The package will run a flask server locally that will accept requests and the ne
 ```
 python main.py
 ```
+## Documentation
+This project was the first interaction with Sphinx and using Readthedocs to host the [documentation] .
 
+[documentation]:https://klettgaus-basic-cipher.readthedocs.io/en/latest/index.html
 ## Built With
 
 * [FLASK](https://pypi.org/project/Flask/) - Web Framework used
