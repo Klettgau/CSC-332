@@ -1,33 +1,5 @@
 import numpy as np
 
-# polybus = np.random.randint(0,36,(6,6))
-# print(type(polybus))
-# poly=np.resize(polybus,(6,6))
-# print(poly)
-# test_seed = "thebangles"
-# encountered = set()
-# zippy = list()
-# aa = np.where(poly <9)
-# bb = zip(aa[0],aa[1])
-#
-# poly=np.random.permutation(36).reshape((6,6))
-# col=len(test_seed)//6
-# print(col)
-# counter = 0
-# for pos,c in enumerate(test_seed):
-#     if c in encountered:
-#         break
-#     else:
-#         encountered.add(c)
-#         rez =np.where(poly ==pos)
-#         tmp = poly
-#         poly[rez[0],rez[1]] = ord(c)-97
-#
-#         zippy.append((rez[0],rez[1]))
-
-
-#print(poly)
-
 table = {0:'A',1:'D',2:'F',3:'G',4:'V',5:'X'}
 
 def seed_polybius(seed):
