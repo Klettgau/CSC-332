@@ -8,10 +8,6 @@ from ciphers.Jefferson import Jefferson
 from ciphers.Hill import  Hill
 
 engima_blue = Blueprint('enigma',__name__)
-vig_blue = Blueprint('vigenere',__name__)
-aff_blue = Blueprint('affine',__name__)
-aff_blue = Blueprint('julius',__name__)
-aff_blue = Blueprint('jefferson',__name__)
 api = Api(engima_blue)
 
 api.add_resource(M3,'/Enigma')

@@ -1,5 +1,4 @@
 import re
-import ciphers.CustomParser as Parser
 from flask_restful import Resource
 
 

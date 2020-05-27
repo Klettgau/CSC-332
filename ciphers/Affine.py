@@ -1,6 +1,6 @@
 from flask_restful import Resource, abort
 
-from ciphers.CustomParser import Parsely
+from deprecated.CustomParser import Parsely
 
 
 class Affine(Resource):

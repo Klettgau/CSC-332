@@ -4,7 +4,7 @@ import random
 from flask import jsonify
 from flask_restful import Resource
 
-from ciphers.CustomParser import Parsely
+from deprecated.CustomParser import Parsely
 
 
 class Jefferson(Resource):

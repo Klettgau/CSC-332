@@ -4,7 +4,7 @@ from flask_restful import reqparse
 
 class Parsely:
     """
-    A Parser to handle each of the different Cipher's url arguments.
+    Deprecated
     """
 
     def parser_jules(self):

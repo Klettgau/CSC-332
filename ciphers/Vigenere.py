@@ -1,6 +1,6 @@
 from flask_restful import Resource
 
-from ciphers.CustomParser import Parsely
+from deprecated.CustomParser import Parsely
 
 
 class Vig(Resource):

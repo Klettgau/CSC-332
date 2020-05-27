@@ -1,7 +1,7 @@
 import argparse
 
 import ciphers.Affine as aff
-import ciphers.CustomParser as CustomParser
+import deprecated.CustomParser as CustomParser
 import ciphers.Engima as Engima
 import ciphers.Jefferson as jeff
 import ciphers.Julius as jul
@@ -9,7 +9,7 @@ import ciphers.Vigenere as vig
 
 
 # this is was the original cli  for the project.
-
+#Deprecated
 
 def main():
     grandfather = CustomParser.Parsely()

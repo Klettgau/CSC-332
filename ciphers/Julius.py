@@ -2,7 +2,7 @@
 # ord char to int
 from flask_restful import Resource
 
-from ciphers.CustomParser import Parsely
+from deprecated.CustomParser import Parsely
 
 
 class Julius(Resource):

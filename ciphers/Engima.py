@@ -3,7 +3,7 @@ import string
 from flask import jsonify
 from flask_restful import Resource
 
-import ciphers.CustomParser as Parser
+import deprecated.CustomParser as Parser
 
 
 class M3(Resource):
@@ -258,6 +258,7 @@ class M3(Resource):
         Returns:
             The char encoded/decoded is returned.
         """
+        #create a dict with tuples for the settings
         current_char = (ord(user_input) - 65) % 26
         for y in range(3, 0, -1):
             if y is 3:
