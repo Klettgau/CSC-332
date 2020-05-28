@@ -1,16 +1,17 @@
 import numpy as np
-
-# both letters are same or only one is left ,add an X
-# 2if both letters are in the same row, replace with neighbor to the right
-# 3 if letters are in the same column,replace with neighbor to the right
-# 4 opposite corners of the rectange rule, the first letter in message in plaintext is the first ojne to convert
+import ciphers.Utils as util
 # constants
 i_reduction = 8
 j_reduction = 9
 alphabet_size = 26
+matrix_dim=5
 
-
-def encode(msg, key_matrix):
+def encode(msg):
+    msg = util.char_to_int(msg)
+    key_matrix=create_key_matrix(matrix_dim,[0,6,9,15,14,21])
+    bigrams=zip(*[msg[i:]for i in range(2)])
+    for pair in bigrams:
+        determine_which_rule(pair,key_matrix,matrix_dim)
     return -1
 
 
@@ -18,38 +19,59 @@ def decode(msg, _key_matrix):
     return -1
 
 
+def determine_which_rule(bigram, matrix, dimension):
+    # check for same row values, cols, length then else into square
+    #
+    rows, cols = np.where(matrix == bigram[0])
+    sec_rows, sec_cols = np.where(matrix == bigram[1])
+    if len(bigram) < 2 or bigram[0] == bigram[1]:
+        bigram = rule_one(bigram)
+    if rows[0] == sec_rows[0]:
+        bigram = rule_two(matrix, dimension, rows, cols, sec_rows, sec_cols)
+    if cols[0] == sec_cols[0]:
+        bigram = rule_three(matrix, dimension, rows, cols, sec_rows, sec_cols)
+    if rows[0] != sec_rows[0]:
+        bigram = rule_four(matrix, dimension, rows, cols, sec_rows, sec_cols)
+    return bigram
+
+
 def rule_one(bigram):
     # check for repeated characaters or one
+    result = list()
     if len(bigram) < 2:
-        bigram = "".join(bigram + "x")
-        return bigram
+        return result.append(bigram + "X")
     if bigram[0] == bigram[1]:
-        bigram = "".join(bigram[0] + "X")
-        return bigram
+        return result.append(bigram[0] + "X")
 
 
-def rule_two(bigram, matrix, dimension):
+def rule_two(matrix, dimension, rows, cols, sec_rows, sec_cols):
     # same row, take right neighbor wrap around
-    rows, cols = np.where(matrix == bigram[0])
-    sec_rows, sec_cols = np.where(matrix == bigram[1])
-
+    result = list()
     first_sub = matrix[(rows[0]) % dimension, (cols[0] + 1) % dimension]
     second_sub = matrix[(sec_rows[0]) % dimension, (sec_cols[0] + 1) % dimension]
-    return "".join(first_sub + second_sub)
+    result.append(first_sub)
+    result.append(second_sub)
+    return result
 
 
-def rule_three(bigram, matrix, dimension):
+def rule_three(matrix, dimension, rows, cols, sec_rows, sec_cols):
     # column rule, take neighnor below you
-    rows, cols = np.where(matrix == bigram[0])
-    sec_rows, sec_cols = np.where(matrix == bigram[1])
+    result = list()
     second_sub = matrix[(sec_rows[0] + 1) % dimension, (sec_cols[0]) % dimension]
     first_sub = matrix[(rows[0] + 1) % dimension, (cols) % dimension]
+    result.append(first_sub)
+    result.append(second_sub)
+    return result
 
-    return "".join(first_sub + second_sub)
 
-def rule_four(bigram, matrix, dimension):
-    # this is the opposite squre rule
-    return -1
+def rule_four(matrix, dimension, rows, cols, sec_rows, sec_cols):
+    # this is the opposite squre rule,swap y values
+    result = list()
+    first_sub = matrix[(rows[0]) % dimension, (sec_cols[0]) % dimension]
+    second_sub = matrix[(sec_rows[0]) % dimension, (cols[0]) % dimension]
+    result.append(first_sub)
+    result.append(second_sub)
+    return result
 
 
 def create_key_matrix(dimension: int, seed: list) -> np.ndarray:
@@ -86,4 +108,4 @@ def create_key_matrix(dimension: int, seed: list) -> np.ndarray:
     # this adds the unique characters in the message to the matrix, need to add the remainder of chars
 
 
-create_key_matrix(5, list(dict.fromkeys([5, 9, 6, 7, 8, 10, 1, 11, 1])))
+encode("HELLOZ")
