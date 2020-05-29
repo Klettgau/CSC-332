@@ -1,17 +1,21 @@
 import numpy as np
 import ciphers.Utils as util
+
 # constants
+X = 23
 i_reduction = 8
 j_reduction = 9
 alphabet_size = 26
-matrix_dim=5
+matrix_dim = 5
+
 
 def encode(msg):
     msg = util.char_to_int(msg)
-    key_matrix=create_key_matrix(matrix_dim,[0,6,9,15,14,21])
-    bigrams=zip(*[msg[i:]for i in range(2)])
+    key_matrix = create_key_matrix(matrix_dim, [0, 6, 9, 15, 14, 21])
+
+    bigrams = zip(*[msg[i:] for i in range(2)])
     for pair in bigrams:
-        determine_which_rule(pair,key_matrix,matrix_dim)
+        print(determine_which_rule(pair, key_matrix, matrix_dim))
     return -1
 
 
@@ -21,27 +25,30 @@ def decode(msg, _key_matrix):
 
 def determine_which_rule(bigram, matrix, dimension):
     # check for same row values, cols, length then else into square
-    #
-    rows, cols = np.where(matrix == bigram[0])
-    sec_rows, sec_cols = np.where(matrix == bigram[1])
-    if len(bigram) < 2 or bigram[0] == bigram[1]:
-        bigram = rule_one(bigram)
+    # So rule one + 2 or 3 or 4 is valid
+    first, second = bigram
+    print(first,second)
+    rows, cols = np.where(matrix == first)
+    sec_rows, sec_cols = np.where(matrix == second)
+    if len(bigram) < 2 or first == second:
+        bigram = rule_one(first)
     if rows[0] == sec_rows[0]:
         bigram = rule_two(matrix, dimension, rows, cols, sec_rows, sec_cols)
+        return bigram
     if cols[0] == sec_cols[0]:
         bigram = rule_three(matrix, dimension, rows, cols, sec_rows, sec_cols)
+        return bigram
     if rows[0] != sec_rows[0]:
         bigram = rule_four(matrix, dimension, rows, cols, sec_rows, sec_cols)
-    return bigram
+        return bigram
 
 
-def rule_one(bigram):
+def rule_one(first_char):
     # check for repeated characaters or one
     result = list()
-    if len(bigram) < 2:
-        return result.append(bigram + "X")
-    if bigram[0] == bigram[1]:
-        return result.append(bigram[0] + "X")
+    result.append(first_char)
+    result.append(X)
+    return result
 
 
 def rule_two(matrix, dimension, rows, cols, sec_rows, sec_cols):
@@ -108,4 +115,4 @@ def create_key_matrix(dimension: int, seed: list) -> np.ndarray:
     # this adds the unique characters in the message to the matrix, need to add the remainder of chars
 
 
-encode("HELLOZ")
+encode("HELZ")
