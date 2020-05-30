@@ -4,4 +4,4 @@ def char_to_int(msg: str) -> list:
 
 
 def int_to_char(msg: list) -> str:
-    return ''.join([chr(s) for s in msg])
+    return ''.join([chr(s+65) for s in msg])
