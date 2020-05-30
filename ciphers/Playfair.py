@@ -1,6 +1,6 @@
 import numpy as np
 import ciphers.Utils as util
-
+import itertools
 # constants
 X = 23
 i_reduction = 8
@@ -11,12 +11,17 @@ matrix_dim = 5
 
 def encode(msg):
     msg = util.char_to_int(msg)
+    msg = pad_message(msg)
     key_matrix = create_key_matrix(matrix_dim, [0, 6, 9, 15, 14, 21])
-
-    bigrams = zip(*[msg[i:] for i in range(2)])
-    for pair in bigrams:
-        print(determine_which_rule(pair, key_matrix, matrix_dim))
-    return -1
+    print(key_matrix)
+    # bigrams = zip(*[msg[i:] for i in range(2)])
+    bigrams = [(msg[i], msg[i + 1]) for i in range(0, len(msg), 2)]
+    print(bigrams)
+    #
+    # for pair in bigrams:
+    #     print(determine_which_rule(pair, key_matrix, matrix_dim))
+    return util.int_to_char(itertools.chain.from_iterable(list(map(lambda x:determine_which_rule(x,key_matrix,matrix_dim),bigrams))))
+    #return util.int_to_char([determine_which_rule(pair, key_matrix, matrix_dim) for pair in bigrams])
 
 
 def decode(msg, _key_matrix):
@@ -27,58 +32,53 @@ def determine_which_rule(bigram, matrix, dimension):
     # check for same row values, cols, length then else into square
     # So rule one + 2 or 3 or 4 is valid
     first, second = bigram
-    print(first,second)
+    if   first == second:
+        first,second = rule_one(first)
     rows, cols = np.where(matrix == first)
     sec_rows, sec_cols = np.where(matrix == second)
-    if len(bigram) < 2 or first == second:
-        bigram = rule_one(first)
     if rows[0] == sec_rows[0]:
-        bigram = rule_two(matrix, dimension, rows, cols, sec_rows, sec_cols)
-        return bigram
+        first_char,second_char = rule_two(matrix, dimension, rows, cols, sec_rows, sec_cols)
+        return first_char,second_char
     if cols[0] == sec_cols[0]:
-        bigram = rule_three(matrix, dimension, rows, cols, sec_rows, sec_cols)
-        return bigram
+        first_char,second_char= rule_three(matrix, dimension, rows, cols, sec_rows, sec_cols)
+        return first_char,second_char
     if rows[0] != sec_rows[0]:
-        bigram = rule_four(matrix, dimension, rows, cols, sec_rows, sec_cols)
-        return bigram
+        first_char,second_char = rule_four(matrix, dimension, rows, cols, sec_rows, sec_cols)
+        return first_char,second_char
+
+
+def pad_message(msg):
+    if len(msg) < 2:
+        msg.append(X)
+    if len(msg) % 2 != 0:
+        msg.append(X)
+    return msg
 
 
 def rule_one(first_char):
     # check for repeated characaters or one
-    result = list()
-    result.append(first_char)
-    result.append(X)
-    return result
+    return first_char,X
 
 
 def rule_two(matrix, dimension, rows, cols, sec_rows, sec_cols):
     # same row, take right neighbor wrap around
-    result = list()
     first_sub = matrix[(rows[0]) % dimension, (cols[0] + 1) % dimension]
     second_sub = matrix[(sec_rows[0]) % dimension, (sec_cols[0] + 1) % dimension]
-    result.append(first_sub)
-    result.append(second_sub)
-    return result
+    return first_sub,second_sub
 
 
 def rule_three(matrix, dimension, rows, cols, sec_rows, sec_cols):
     # column rule, take neighnor below you
-    result = list()
     second_sub = matrix[(sec_rows[0] + 1) % dimension, (sec_cols[0]) % dimension]
     first_sub = matrix[(rows[0] + 1) % dimension, (cols) % dimension]
-    result.append(first_sub)
-    result.append(second_sub)
-    return result
+    return first_sub,second_sub
 
 
 def rule_four(matrix, dimension, rows, cols, sec_rows, sec_cols):
     # this is the opposite squre rule,swap y values
-    result = list()
     first_sub = matrix[(rows[0]) % dimension, (sec_cols[0]) % dimension]
     second_sub = matrix[(sec_rows[0]) % dimension, (cols[0]) % dimension]
-    result.append(first_sub)
-    result.append(second_sub)
-    return result
+    return first_sub,second_sub
 
 
 def create_key_matrix(dimension: int, seed: list) -> np.ndarray:
@@ -114,5 +114,8 @@ def create_key_matrix(dimension: int, seed: list) -> np.ndarray:
     return key_mat
     # this adds the unique characters in the message to the matrix, need to add the remainder of chars
 
+print(util.char_to_int("HELX"))
+res=encode("HEL")
+print(res)
+print(util.char_to_int(res))
 
-encode("HELZ")
