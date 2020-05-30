@@ -9,26 +9,17 @@ alphabet_size = 26
 matrix_dim = 5
 
 
-def encode(msg):
+def encode_decode(msg,decrypt,key_matrix=None):
     msg = util.char_to_int(msg)
     msg = pad_message(msg)
-    key_matrix = create_key_matrix(matrix_dim, [0, 6, 9, 15, 14, 21])
+    if key_matrix is None:
+        key_matrix = create_key_matrix(matrix_dim, [0, 6, 9, 15, 14, 21])
     print(key_matrix)
-    # bigrams = zip(*[msg[i:] for i in range(2)])
     bigrams = [(msg[i], msg[i + 1]) for i in range(0, len(msg), 2)]
     print(bigrams)
-    #
-    # for pair in bigrams:
-    #     print(determine_which_rule(pair, key_matrix, matrix_dim))
-    return util.int_to_char(itertools.chain.from_iterable(list(map(lambda x:determine_which_rule(x,key_matrix,matrix_dim),bigrams))))
-    #return util.int_to_char([determine_which_rule(pair, key_matrix, matrix_dim) for pair in bigrams])
+    return util.int_to_char(itertools.chain.from_iterable(list(map(lambda x:determine_which_rule(x,key_matrix,matrix_dim,decrypt),bigrams))))
 
-
-def decode(msg, _key_matrix):
-    return -1
-
-
-def determine_which_rule(bigram, matrix, dimension):
+def determine_which_rule(bigram, matrix, dimension,decrypt=False):
     # check for same row values, cols, length then else into square
     # So rule one + 2 or 3 or 4 is valid
     first, second = bigram
@@ -37,10 +28,10 @@ def determine_which_rule(bigram, matrix, dimension):
     rows, cols = np.where(matrix == first)
     sec_rows, sec_cols = np.where(matrix == second)
     if rows[0] == sec_rows[0]:
-        first_char,second_char = rule_two(matrix, dimension, rows, cols, sec_rows, sec_cols)
+        first_char,second_char = rule_two(matrix, dimension, rows, cols, sec_rows, sec_cols,decrypt)
         return first_char,second_char
     if cols[0] == sec_cols[0]:
-        first_char,second_char= rule_three(matrix, dimension, rows, cols, sec_rows, sec_cols)
+        first_char,second_char= rule_three(matrix, dimension, rows, cols, sec_rows, sec_cols,decrypt)
         return first_char,second_char
     if rows[0] != sec_rows[0]:
         first_char,second_char = rule_four(matrix, dimension, rows, cols, sec_rows, sec_cols)
@@ -60,17 +51,25 @@ def rule_one(first_char):
     return first_char,X
 
 
-def rule_two(matrix, dimension, rows, cols, sec_rows, sec_cols):
+def rule_two(matrix, dimension, rows, cols, sec_rows, sec_cols,decrypt=False):
     # same row, take right neighbor wrap around
-    first_sub = matrix[(rows[0]) % dimension, (cols[0] + 1) % dimension]
-    second_sub = matrix[(sec_rows[0]) % dimension, (sec_cols[0] + 1) % dimension]
+    if decrypt:
+        first_sub = matrix[(rows[0]) % dimension, (cols[0] - 1) % dimension]
+        second_sub = matrix[(sec_rows[0]) % dimension, (sec_cols[0] - 1) % dimension]
+    else:
+        first_sub = matrix[(rows[0]) % dimension, (cols[0] + 1) % dimension]
+        second_sub = matrix[(sec_rows[0]) % dimension, (sec_cols[0] + 1) % dimension]
     return first_sub,second_sub
 
 
-def rule_three(matrix, dimension, rows, cols, sec_rows, sec_cols):
+def rule_three(matrix, dimension, rows, cols, sec_rows, sec_cols,decrypt=False):
     # column rule, take neighnor below you
-    second_sub = matrix[(sec_rows[0] + 1) % dimension, (sec_cols[0]) % dimension]
-    first_sub = matrix[(rows[0] + 1) % dimension, (cols) % dimension]
+    if decrypt:
+        second_sub = matrix[(sec_rows[0] -1) % dimension, (sec_cols[0]) % dimension]
+        first_sub = matrix[(rows[0] -1) % dimension, (cols) % dimension]
+    else:
+        second_sub = matrix[(sec_rows[0] + 1) % dimension, (sec_cols[0]) % dimension]
+        first_sub = matrix[(rows[0] + 1) % dimension, (cols) % dimension]
     return first_sub,second_sub
 
 
@@ -114,8 +113,8 @@ def create_key_matrix(dimension: int, seed: list) -> np.ndarray:
     return key_mat
     # this adds the unique characters in the message to the matrix, need to add the remainder of chars
 
-print(util.char_to_int("HELX"))
-res=encode("HEL")
+print(util.char_to_int("DOBBY"))
+res=encode_decode("DOBBY",False)
 print(res)
 print(util.char_to_int(res))
-
+print(encode_decode(res,True))
