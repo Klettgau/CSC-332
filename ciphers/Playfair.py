@@ -15,16 +15,13 @@ def encode_decode(msg,decrypt,key_matrix=None):
     if key_matrix is None:
         key_matrix = create_key_matrix(matrix_dim, [0, 6, 9, 15, 14, 21])
     print(key_matrix)
-    bigrams = [(msg[i], msg[i + 1]) for i in range(0, len(msg), 2)]
-    print(bigrams)
+    bigrams = detect_double(msg)
     return util.int_to_char(itertools.chain.from_iterable(list(map(lambda x:determine_which_rule(x,key_matrix,matrix_dim,decrypt),bigrams))))
 
 def determine_which_rule(bigram, matrix, dimension,decrypt=False):
     # check for same row values, cols, length then else into square
     # So rule one + 2 or 3 or 4 is valid
     first, second = bigram
-    if   first == second:
-        first,second = rule_one(first)
     rows, cols = np.where(matrix == first)
     sec_rows, sec_cols = np.where(matrix == second)
     if rows[0] == sec_rows[0]:
@@ -46,6 +43,18 @@ def pad_message(msg):
     return msg
 
 
+def detect_double(msg):
+    bigrams = [(msg[i], msg[i + 1]) for i in range(0, len(msg), 2)]
+    updated_bigram = list()
+    for x,y in bigrams:
+        if   x == y:
+            x_first,x_second = rule_one(x)
+            y_first,y_second=rule_one(y)
+            updated_bigram.append((x_first,x_second))
+            updated_bigram.append((y_first,y_second))
+        else:
+            updated_bigram.append((x,y))
+    return updated_bigram
 def rule_one(first_char):
     # check for repeated characaters or one
     return first_char,X
@@ -113,8 +122,8 @@ def create_key_matrix(dimension: int, seed: list) -> np.ndarray:
     return key_mat
     # this adds the unique characters in the message to the matrix, need to add the remainder of chars
 
-print(util.char_to_int("DOBBY"))
-res=encode_decode("DOBBY",False)
+print(util.char_to_int("PLEASESENDHELP"))
+res=encode_decode("PLEASESENDHELPP",False)
 print(res)
 print(util.char_to_int(res))
 print(encode_decode(res,True))
