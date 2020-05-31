@@ -10,11 +10,10 @@ alphabet_size = 26
 matrix_dim = 5
 
 
-def encode_decode(msg, decrypt, key_matrix=None):
+def encode_decode(msg,seed, decrypt, key_matrix=None):
     msg = util.char_to_int(msg)
-    msg = pad_message(msg)
     if key_matrix is None:
-        key_matrix = create_key_matrix(matrix_dim, [0, 6, 9, 15, 14, 21])
+        key_matrix = create_key_matrix(matrix_dim, seed)
     print(key_matrix)
     bigrams = detect_double(msg)
     return util.int_to_char(itertools.chain.from_iterable(
@@ -36,15 +35,6 @@ def determine_which_rule(bigram, matrix, dimension, decrypt=False):
     if rows[0] != sec_rows[0]:
         first_char, second_char = rule_four(matrix, dimension, rows, cols, sec_rows, sec_cols)
         return first_char, second_char
-
-
-def pad_message(msg):
-    if len(msg) < 2:
-        msg.append(X)
-    if len(msg) % 2 != 0:
-        msg.append(X)
-    return msg
-
 
 def detect_double(msg):
 #    Hacky using the exception
@@ -129,12 +119,3 @@ def create_key_matrix(dimension: int, seed: list) -> np.ndarray:
             col_pos = (col_pos + 1) % dimension
 
     return key_mat
-    # this adds the unique characters in the message to the matrix, need to add the remainder of chars
-
-
-print(util.char_to_int("PLEASESENDHELP"))
-detect_double(util.char_to_int("PLEASESENDHELPP"))
-res = encode_decode("PLEASESENDHELPP", False)
-print(res)
-print(util.char_to_int(res))
-print(encode_decode(res, True))
