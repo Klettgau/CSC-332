@@ -1,6 +1,7 @@
 import numpy as np
 import ciphers.Utils as util
 import itertools
+
 # constants
 X = 23
 i_reduction = 8
@@ -9,30 +10,32 @@ alphabet_size = 26
 matrix_dim = 5
 
 
-def encode_decode(msg,decrypt,key_matrix=None):
+def encode_decode(msg, decrypt, key_matrix=None):
     msg = util.char_to_int(msg)
     msg = pad_message(msg)
     if key_matrix is None:
         key_matrix = create_key_matrix(matrix_dim, [0, 6, 9, 15, 14, 21])
     print(key_matrix)
     bigrams = detect_double(msg)
-    return util.int_to_char(itertools.chain.from_iterable(list(map(lambda x:determine_which_rule(x,key_matrix,matrix_dim,decrypt),bigrams))))
+    return util.int_to_char(itertools.chain.from_iterable(
+        list(map(lambda x: determine_which_rule(x, key_matrix, matrix_dim, decrypt), bigrams))))
 
-def determine_which_rule(bigram, matrix, dimension,decrypt=False):
+
+def determine_which_rule(bigram, matrix, dimension, decrypt=False):
     # check for same row values, cols, length then else into square
     # So rule one + 2 or 3 or 4 is valid
     first, second = bigram
     rows, cols = np.where(matrix == first)
     sec_rows, sec_cols = np.where(matrix == second)
     if rows[0] == sec_rows[0]:
-        first_char,second_char = rule_two(matrix, dimension, rows, cols, sec_rows, sec_cols,decrypt)
-        return first_char,second_char
+        first_char, second_char = rule_two(matrix, dimension, rows, cols, sec_rows, sec_cols, decrypt)
+        return first_char, second_char
     if cols[0] == sec_cols[0]:
-        first_char,second_char= rule_three(matrix, dimension, rows, cols, sec_rows, sec_cols,decrypt)
-        return first_char,second_char
+        first_char, second_char = rule_three(matrix, dimension, rows, cols, sec_rows, sec_cols, decrypt)
+        return first_char, second_char
     if rows[0] != sec_rows[0]:
-        first_char,second_char = rule_four(matrix, dimension, rows, cols, sec_rows, sec_cols)
-        return first_char,second_char
+        first_char, second_char = rule_four(matrix, dimension, rows, cols, sec_rows, sec_cols)
+        return first_char, second_char
 
 
 def pad_message(msg):
@@ -44,23 +47,29 @@ def pad_message(msg):
 
 
 def detect_double(msg):
-    bigrams = [(msg[i], msg[i + 1]) for i in range(0, len(msg), 2)]
+#    Hacky using the exception
     updated_bigram = list()
-    for x,y in bigrams:
-        if   x == y:
-            x_first,x_second = rule_one(x)
-            y_first,y_second=rule_one(y)
-            updated_bigram.append((x_first,x_second))
-            updated_bigram.append((y_first,y_second))
-        else:
-            updated_bigram.append((x,y))
+    for i in range(0, len(msg), 2):
+        xchar=msg[i]
+        try:
+            ychar=msg[i+1]
+            if xchar == ychar:
+                x_first, x_second = rule_one(xchar)
+                updated_bigram.append((x_first, x_second))
+            else:
+                updated_bigram.append((xchar,ychar))
+        except IndexError as e:
+            updated_bigram.append((xchar,X))
+            return updated_bigram
     return updated_bigram
+
+
 def rule_one(first_char):
     # check for repeated characaters or one
-    return first_char,X
+    return first_char, X
 
 
-def rule_two(matrix, dimension, rows, cols, sec_rows, sec_cols,decrypt=False):
+def rule_two(matrix, dimension, rows, cols, sec_rows, sec_cols, decrypt=False):
     # same row, take right neighbor wrap around
     if decrypt:
         first_sub = matrix[(rows[0]) % dimension, (cols[0] - 1) % dimension]
@@ -68,25 +77,25 @@ def rule_two(matrix, dimension, rows, cols, sec_rows, sec_cols,decrypt=False):
     else:
         first_sub = matrix[(rows[0]) % dimension, (cols[0] + 1) % dimension]
         second_sub = matrix[(sec_rows[0]) % dimension, (sec_cols[0] + 1) % dimension]
-    return first_sub,second_sub
+    return first_sub, second_sub
 
 
-def rule_three(matrix, dimension, rows, cols, sec_rows, sec_cols,decrypt=False):
+def rule_three(matrix, dimension, rows, cols, sec_rows, sec_cols, decrypt=False):
     # column rule, take neighnor below you
     if decrypt:
-        second_sub = matrix[(sec_rows[0] -1) % dimension, (sec_cols[0]) % dimension]
-        first_sub = matrix[(rows[0] -1) % dimension, (cols) % dimension]
+        second_sub = matrix[(sec_rows[0] - 1) % dimension, (sec_cols[0]) % dimension]
+        first_sub = matrix[(rows[0] - 1) % dimension, (cols) % dimension]
     else:
         second_sub = matrix[(sec_rows[0] + 1) % dimension, (sec_cols[0]) % dimension]
         first_sub = matrix[(rows[0] + 1) % dimension, (cols) % dimension]
-    return first_sub,second_sub
+    return first_sub, second_sub
 
 
 def rule_four(matrix, dimension, rows, cols, sec_rows, sec_cols):
     # this is the opposite squre rule,swap y values
     first_sub = matrix[(rows[0]) % dimension, (sec_cols[0]) % dimension]
     second_sub = matrix[(sec_rows[0]) % dimension, (cols[0]) % dimension]
-    return first_sub,second_sub
+    return first_sub, second_sub
 
 
 def create_key_matrix(dimension: int, seed: list) -> np.ndarray:
@@ -122,8 +131,10 @@ def create_key_matrix(dimension: int, seed: list) -> np.ndarray:
     return key_mat
     # this adds the unique characters in the message to the matrix, need to add the remainder of chars
 
+
 print(util.char_to_int("PLEASESENDHELP"))
-res=encode_decode("PLEASESENDHELPP",False)
+detect_double(util.char_to_int("PLEASESENDHELPP"))
+res = encode_decode("PLEASESENDHELPP", False)
 print(res)
 print(util.char_to_int(res))
-print(encode_decode(res,True))
+print(encode_decode(res, True))
