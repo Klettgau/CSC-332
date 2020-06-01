@@ -11,7 +11,7 @@ matrix_dim = 5
 
 
 def encode_decode(msg,seed, decrypt, key_matrix=None):
-    msg = util.char_to_int(msg)
+    msg = util.char_to_int_li(msg)
     if key_matrix is None:
         key_matrix = create_key_matrix(matrix_dim, seed)
     print(key_matrix)
