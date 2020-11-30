@@ -1,16 +1,31 @@
 # chr int to char
 # ord char to int
 from flask_restful import Resource
-
+from flask_restful import reqparse
+from flask import request
 from deprecated.CustomParser import Parsely
 
 
 class Julius(Resource):
+    def post(self):
+        print(request.headers)
+        parser = reqparse.RequestParser()
+        parser.add_argument("message", type=str, required=True, help="the message")
+        parser.add_argument("privateKey", required=True,help="the private key.", type=int)
+        parser.add_argument("mode", required=True,help="0 for encode and 1 for decode", type=int)
+        args = parser.parse_args()
+        if args.mode is 0:
+            print(self.encode(args.message, args.privateKey))
+            return self.encode(args.message, args.privateKey)
+        return self.decode(args.message, args.privateKey)
 
     def get(self):
-        parser = Parsely()
-        parser = parser.parser_jules()
+        parser = reqparse.RequestParser()
+        parser.add_argument("message", type=str, required=True, help="the message")
+        parser.add_argument("privateKey", required=True,help="the private key.", type=int)
+        parser.add_argument("mode", required=True,help="0 for encode and 1 for decode", type=int)
         args = parser.parse_args()
+        print(args)
         if args.mode is 0:
             return self.encode(args.message, args.privateKey)
         return self.decode(args.message, args.privateKey)

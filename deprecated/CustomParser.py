@@ -9,9 +9,9 @@ class Parsely:
 
     def parser_jules(self):
         parser = reqparse.RequestParser(bundle_errors=True)
-        parser.add_argument("message", type=str, required=True, help="the message")
-        parser.add_argument("privateKey", required=True, help="the private key.", type=int)
-        parser.add_argument("mode", required=True, help="0 for encode and 1 for decode", type=int)
+        parser.add_argument("message", type=str, required=True, location='form', help="the message")
+        parser.add_argument("privateKey", required=True, location='form',help="the private key.", type=int)
+        parser.add_argument("mode", required=True, location='form',help="0 for encode and 1 for decode", type=int)
         return parser
 
     def parser_affine(self):
